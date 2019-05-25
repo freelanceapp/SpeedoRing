@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.speedoring">
+
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+
+    <uses-feature android:name="android.hardware.location.gps" />
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme.NoActionBar"
+        android:usesCleartextTraffic="true"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:targetApi="m">
+
+        <activity
+            android:name=".ui.user.activity.SplashScreen"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".ui.vendor.activity.SignInActivity" />
+        <activity android:name=".ui.user.activity.UserHomeActivity" />
+        <activity android:name=".ui.vendor.activity.SignUpActivity" />
+        <activity android:name=".ui.user.activity.UserServicesActivity" />
+        <activity android:name=".ui.user.activity.UserServiceDetailActivity" />
+        <activity
+            android:name=".ui.vendor.activity.VendorHomeActivity"
+            android:label="" />
+        <activity
+            android:name=".ui.vendor.activity.VendorProfileActivity"
+            android:label="" />
+        <activity android:name=".ui.user.activity.UserProductListActivity" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="4f92de69364db81c0b98762d88b4025811aba6e8" />
+    </application>
+
+</manifest>
