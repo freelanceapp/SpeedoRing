@@ -2,14 +2,13 @@ package com.speedoring.retrofit_provider;
 
 import com.speedoring.constant.Constant;
 import com.speedoring.modal.banner_model.BannerModel;
-import com.speedoring.modal.coupon_model.CouponModel;
-import com.speedoring.modal.popular_vendor.StoreMainModel;
-import com.speedoring.modal.product_category.ProductCategoryMainModal;
-import com.speedoring.modal.product_detail.ProductDetailMainModal;
-import com.speedoring.modal.product_list_home.HomeProductListMainModal;
-import com.speedoring.modal.product_sub_category.ProductSubCategoryMainModal;
-import com.speedoring.modal.service_category.ServiceCategoryMainModal;
-import com.speedoring.modal.service_list.ServiceListMainModal;
+import com.speedoring.modal.user.product_category.ProductCategoryMainModal;
+import com.speedoring.modal.user.product_detail.ProductDetailMainModal;
+import com.speedoring.modal.user.product_list_home.HomeProductListMainModal;
+import com.speedoring.modal.user.product_sub_category.ProductSubCategoryMainModal;
+import com.speedoring.modal.user.service_category.ServiceCategoryMainModal;
+import com.speedoring.modal.user.service_list.ServiceListMainModal;
+import com.speedoring.modal.vendor.login_data.VendorLoginMainModal;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -22,12 +21,6 @@ public interface RetrofitApiClient {
 
     @GET(Constant.BANNER)
     Call<BannerModel> getBanner();
-
-    @GET(Constant.ALL_STORE)
-    Call<StoreMainModel> getStore();
-
-    @GET(Constant.COUPON)
-    Call<CouponModel> getCoupon();
 
     @GET(Constant.SERVICE_CATEGORY)
     Call<ServiceCategoryMainModal> serviceCategory();
@@ -62,4 +55,21 @@ public interface RetrofitApiClient {
     @POST(Constant.PRODUCT_DETAIL)
     Call<ProductDetailMainModal> productDetail(@Field("listing_id") String product_id);
 
+    /***************************************************************************************************/
+    /*********************Vendor api******************/
+    @FormUrlEncoded
+    @POST(Constant.VENDOR_LOGIN)
+    Call<VendorLoginMainModal> vendorLogin(@Field("mobile_number") String mobile_number, @Field("password") String password);
+
+    @FormUrlEncoded
+    @POST(Constant.VENDOR_SIGN_UP)
+    Call<ResponseBody> vendorSignUp(@Field("first_name") String first_name, @Field("last_name") String last_name,
+                                    @Field("mobile_number") String mobile_number, @Field("password") String password,
+                                    @Field("address") String address, @Field("city") String city,
+                                    @Field("state") String state, @Field("pincode") String pincode,
+                                    @Field("about") String about);
+
+    @FormUrlEncoded
+    @POST(Constant.OTP_VERIFY)
+    Call<ResponseBody> otpVerification(@Field("mobile_no") String mobile_no, @Field("otp_no") String otp_no);
 }

@@ -17,7 +17,6 @@ import com.speedoring.adapter.TodaysOfferAdapter;
 import com.speedoring.modal.banner_model.BannerDatum;
 import com.speedoring.modal.banner_model.BannerModel;
 import com.speedoring.modal.coupon_model.CouponDatum;
-import com.speedoring.modal.coupon_model.CouponModel;
 import com.speedoring.retrofit_provider.RetrofitService;
 import com.speedoring.retrofit_provider.WebResponse;
 import com.speedoring.utils.Alerts;
@@ -117,6 +116,7 @@ public class VendorHomeFragment extends BaseFragment implements View.OnClickList
 
     private void getCoupon1() {
         if (cd.isNetworkAvailable()) {
+/*
             RetrofitService.getCoupon(new Dialog(mContext), retrofitApiClient.getCoupon(), new WebResponse() {
                 @Override
                 public void onResponseSuccess(Response<?> result) {
@@ -133,6 +133,7 @@ public class VendorHomeFragment extends BaseFragment implements View.OnClickList
                     Alerts.show(mContext, error);
                 }
             });
+*/
         } else {
             cd.show(mContext);
         }

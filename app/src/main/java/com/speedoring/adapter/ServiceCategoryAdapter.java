@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.speedoring.R;
-import com.speedoring.modal.service_category.ServicesCategory;
+import com.speedoring.modal.user.service_category.ServicesCategory;
 import com.speedoring.ui.user.activity.UserServicesActivity;
 
 import java.util.List;

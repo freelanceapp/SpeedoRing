@@ -1,13 +1,15 @@
-package com.speedoring.modal.product_detail;
+package com.speedoring.modal.user.product_category;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class ProductDetailMainModal implements Parcelable {
+import java.util.ArrayList;
+import java.util.List;
+
+public class ProductCategoryMainModal implements Parcelable {
 
     @SerializedName("error")
     @Expose
@@ -15,32 +17,32 @@ public class ProductDetailMainModal implements Parcelable {
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("product_listing")
+    @SerializedName("category")
     @Expose
-    private ProductListing productListing;
-    public final static Parcelable.Creator<ProductDetailMainModal> CREATOR = new Creator<ProductDetailMainModal>() {
+    private List<ProductCategoryList> category = new ArrayList<ProductCategoryList>();
+    public final static Parcelable.Creator<ProductCategoryMainModal> CREATOR = new Creator<ProductCategoryMainModal>() {
 
 
         @SuppressWarnings({
                 "unchecked"
         })
-        public ProductDetailMainModal createFromParcel(Parcel in) {
-            return new ProductDetailMainModal(in);
+        public ProductCategoryMainModal createFromParcel(Parcel in) {
+            return new ProductCategoryMainModal(in);
         }
 
-        public ProductDetailMainModal[] newArray(int size) {
-            return (new ProductDetailMainModal[size]);
+        public ProductCategoryMainModal[] newArray(int size) {
+            return (new ProductCategoryMainModal[size]);
         }
 
     };
 
-    protected ProductDetailMainModal(Parcel in) {
+    protected ProductCategoryMainModal(Parcel in) {
         this.error = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
         this.message = ((String) in.readValue((String.class.getClassLoader())));
-        this.productListing = ((ProductListing) in.readValue((ProductListing.class.getClassLoader())));
+        in.readList(this.category, (ProductCategoryList.class.getClassLoader()));
     }
 
-    public ProductDetailMainModal() {
+    public ProductCategoryMainModal() {
     }
 
     public Boolean getError() {
@@ -59,18 +61,18 @@ public class ProductDetailMainModal implements Parcelable {
         this.message = message;
     }
 
-    public ProductListing getProductListing() {
-        return productListing;
+    public List<ProductCategoryList> getCategory() {
+        return category;
     }
 
-    public void setProductListing(ProductListing productListing) {
-        this.productListing = productListing;
+    public void setCategory(List<ProductCategoryList> category) {
+        this.category = category;
     }
 
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(error);
         dest.writeValue(message);
-        dest.writeValue(productListing);
+        dest.writeList(category);
     }
 
     public int describeContents() {

@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.speedoring.R;
-import com.speedoring.modal.product_category.ProductCategoryList;
+import com.speedoring.modal.user.product_category.ProductCategoryList;
 
 import java.util.List;
 

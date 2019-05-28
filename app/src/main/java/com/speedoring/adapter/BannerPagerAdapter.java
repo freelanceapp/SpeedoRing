@@ -45,7 +45,7 @@ public class BannerPagerAdapter extends PagerAdapter {
         View itemView = mLayoutInflater.inflate(R.layout.slide_show_pager_item, container, false);
         ImageView imageView = itemView.findViewById(R.id.imageView);
         String strUrl = searchArrayList.get(position).getOfferPicture();
-        Glide.with(mContext).load(IMAGE5 + strUrl).placeholder(R.drawable.ic_default_photo).into(imageView);
+        Glide.with(mContext).load(strUrl).placeholder(R.drawable.ic_default_photo).into(imageView);
         container.addView(itemView);
         return itemView;
     }

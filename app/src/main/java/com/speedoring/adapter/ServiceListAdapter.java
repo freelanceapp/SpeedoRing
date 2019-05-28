@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.speedoring.R;
-import com.speedoring.modal.service_list.ServiceList;
+import com.speedoring.modal.user.service_list.ServiceList;
 import com.speedoring.ui.user.activity.UserServiceDetailActivity;
 
 import java.util.List;

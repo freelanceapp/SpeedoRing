@@ -1,4 +1,4 @@
-package com.speedoring.modal.service_list;
+package com.speedoring.modal.user.service_list;
 
 import android.os.Parcel;
 import android.os.Parcelable;

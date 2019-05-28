@@ -1,4 +1,4 @@
-package com.speedoring.modal.product_list_home;
+package com.speedoring.modal.user.product_list_home;
 
 import android.os.Parcel;
 import android.os.Parcelable;

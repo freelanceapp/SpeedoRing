@@ -11,7 +11,7 @@ import android.widget.RelativeLayout;
 
 import com.bumptech.glide.Glide;
 import com.speedoring.R;
-import com.speedoring.modal.product_detail.ProductImage;
+import com.speedoring.modal.user.product_detail.ProductImage;
 
 import java.util.List;
 

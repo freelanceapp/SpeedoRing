@@ -1,11 +1,10 @@
-package com.speedoring.modal.service_category;
+package com.speedoring.modal.user.service_category;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -40,7 +39,7 @@ public class ServiceCategoryMainModal implements Parcelable {
     protected ServiceCategoryMainModal(Parcel in) {
         this.result = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
         this.message = ((String) in.readValue((String.class.getClassLoader())));
-        in.readList(this.servicesCategory, (com.speedoring.modal.service_category.ServicesCategory.class.getClassLoader()));
+        in.readList(this.servicesCategory, (com.speedoring.modal.user.service_category.ServicesCategory.class.getClassLoader()));
     }
 
     public ServiceCategoryMainModal() {

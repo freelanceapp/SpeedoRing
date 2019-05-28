@@ -9,16 +9,16 @@ import com.google.gson.annotations.SerializedName;
 
 public class BannerDatum implements Parcelable {
 
-    @SerializedName("id")
+    @SerializedName("banner_id")
     @Expose
     private String id;
-    @SerializedName("bannar_name")
+    @SerializedName("banner_title")
     @Expose
     private String offerName;
     @SerializedName("banar_link")
     @Expose
     private String offerLink;
-    @SerializedName("banar_picture")
+    @SerializedName("banner_image")
     @Expose
     private String offerPicture;
     @SerializedName("status")

@@ -33,7 +33,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         Log.d(TAG, "Refreshed token: " + s);
         AppPreference.setStringPreference(getApplicationContext(), Constant.TOKEN, s);
 
-        if (AppPreference.getBooleanPreference(getApplicationContext(), Constant.LOGIN_API)) {
+        if (AppPreference.getBooleanPreference(getApplicationContext(), Constant.IS_LOGIN)) {
             // updateToken(s);
         }
     }

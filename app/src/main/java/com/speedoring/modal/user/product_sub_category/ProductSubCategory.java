@@ -1,4 +1,4 @@
-package com.speedoring.modal.product_sub_category;
+package com.speedoring.modal.user.product_sub_category;
 
 import android.os.Parcel;
 import android.os.Parcelable;

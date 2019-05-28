@@ -10,17 +10,12 @@ import android.widget.TextView;
 
 import com.speedoring.R;
 import com.speedoring.adapter.ProductListPaginationAdapter;
-import com.speedoring.modal.product_list_home.HomeProductListMainModal;
-import com.speedoring.modal.product_list_home.HomeProductListing;
-import com.speedoring.modal.service_list.ServiceList;
+import com.speedoring.modal.user.product_list_home.HomeProductListMainModal;
 import com.speedoring.pagination_listener.PaginationScrollListener;
 import com.speedoring.retrofit_provider.RetrofitService;
 import com.speedoring.retrofit_provider.WebResponse;
 import com.speedoring.utils.Alerts;
 import com.speedoring.utils.BaseActivity;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import retrofit2.Response;
 

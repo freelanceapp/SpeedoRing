@@ -23,14 +23,14 @@ import com.speedoring.adapter.ProductSubCategoryAdapter;
 import com.speedoring.adapter.ServiceCategoryAdapter;
 import com.speedoring.modal.banner_model.BannerDatum;
 import com.speedoring.modal.banner_model.BannerModel;
-import com.speedoring.modal.product_category.ProductCategoryList;
-import com.speedoring.modal.product_category.ProductCategoryMainModal;
-import com.speedoring.modal.product_list_home.HomeProductListMainModal;
-import com.speedoring.modal.product_list_home.HomeProductListing;
-import com.speedoring.modal.product_sub_category.ProductSubCategory;
-import com.speedoring.modal.product_sub_category.ProductSubCategoryMainModal;
-import com.speedoring.modal.service_category.ServiceCategoryMainModal;
-import com.speedoring.modal.service_category.ServicesCategory;
+import com.speedoring.modal.user.product_category.ProductCategoryList;
+import com.speedoring.modal.user.product_category.ProductCategoryMainModal;
+import com.speedoring.modal.user.product_list_home.HomeProductListMainModal;
+import com.speedoring.modal.user.product_list_home.HomeProductListing;
+import com.speedoring.modal.user.product_sub_category.ProductSubCategory;
+import com.speedoring.modal.user.product_sub_category.ProductSubCategoryMainModal;
+import com.speedoring.modal.user.service_category.ServiceCategoryMainModal;
+import com.speedoring.modal.user.service_category.ServicesCategory;
 import com.speedoring.retrofit_provider.RetrofitService;
 import com.speedoring.retrofit_provider.WebResponse;
 import com.speedoring.ui.user.activity.UserProductListActivity;
@@ -81,15 +81,15 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private void initPager() {
         pagerSuccess = rootView.findViewById(R.id.pagerSuccess);
         adapter = new BannerPagerAdapter(mContext, successImagesList, this);
-        //imagesApi();
-       /* imageHandler = new Handler();
+        imagesApi();
+        imageHandler = new Handler();
         imageRunnable = new Runnable() {
             @Override
             public void run() {
                 marriageSlide();
             }
         };
-        imageHandler.postDelayed(imageRunnable, 3000);*/
+        imageHandler.postDelayed(imageRunnable, 3000);
     }
 
     public void marriageSlide() {
@@ -144,7 +144,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                     successImagesList.addAll(imagesModal.getData());
                     pagerSuccess.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
-
                 }
 
                 @Override

@@ -51,6 +51,7 @@
             android:label="" />
         <activity android:name=".ui.user.activity.UserProductListActivity" />
         <activity android:name=".ui.user.activity.UserProductDetailActivity" />
+        <activity android:name=".ui.vendor.activity.OtpVerificationActivity" />
 
         <meta-data
             android:name="io.fabric.ApiKey"

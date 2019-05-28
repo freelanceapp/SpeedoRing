@@ -10,8 +10,8 @@ import android.widget.TextView;
 
 import com.speedoring.R;
 import com.speedoring.adapter.ServiceListAdapter;
-import com.speedoring.modal.service_list.ServiceList;
-import com.speedoring.modal.service_list.ServiceListMainModal;
+import com.speedoring.modal.user.service_list.ServiceList;
+import com.speedoring.modal.user.service_list.ServiceListMainModal;
 import com.speedoring.retrofit_provider.RetrofitService;
 import com.speedoring.retrofit_provider.WebResponse;
 import com.speedoring.utils.Alerts;

@@ -1,9 +1,6 @@
 package com.speedoring.ui.vendor.fragment;
 
-import android.app.Dialog;
 import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -12,22 +9,14 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.speedoring.R;
-import com.speedoring.adapter.BannerPagerAdapter;
 import com.speedoring.adapter.TodaysOfferAdapter;
-import com.speedoring.modal.banner_model.BannerDatum;
-import com.speedoring.modal.banner_model.BannerModel;
 import com.speedoring.modal.coupon_model.CouponDatum;
-import com.speedoring.modal.coupon_model.CouponModel;
 import com.speedoring.retrofit_provider.RetrofitService;
-import com.speedoring.retrofit_provider.WebResponse;
-import com.speedoring.utils.Alerts;
 import com.speedoring.utils.BaseFragment;
 import com.speedoring.utils.ConnectionDetector;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import retrofit2.Response;
 
 public class VendorListingFragment extends BaseFragment implements View.OnClickListener {
 
@@ -60,6 +49,7 @@ public class VendorListingFragment extends BaseFragment implements View.OnClickL
 
     private void getCoupon1() {
         if (cd.isNetworkAvailable()) {
+/*
             RetrofitService.getCoupon(new Dialog(mContext), retrofitApiClient.getCoupon(), new WebResponse() {
                 @Override
                 public void onResponseSuccess(Response<?> result) {
@@ -76,6 +66,7 @@ public class VendorListingFragment extends BaseFragment implements View.OnClickL
                     Alerts.show(mContext, error);
                 }
             });
+*/
         } else {
             cd.show(mContext);
         }

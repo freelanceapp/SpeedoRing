@@ -4,14 +4,13 @@ import android.app.Dialog;
 
 import com.speedoring.constant.Constant;
 import com.speedoring.modal.banner_model.BannerModel;
-import com.speedoring.modal.coupon_model.CouponModel;
-import com.speedoring.modal.popular_vendor.StoreMainModel;
-import com.speedoring.modal.product_category.ProductCategoryMainModal;
-import com.speedoring.modal.product_detail.ProductDetailMainModal;
-import com.speedoring.modal.product_list_home.HomeProductListMainModal;
-import com.speedoring.modal.product_sub_category.ProductSubCategoryMainModal;
-import com.speedoring.modal.service_category.ServiceCategoryMainModal;
-import com.speedoring.modal.service_list.ServiceListMainModal;
+import com.speedoring.modal.user.product_category.ProductCategoryMainModal;
+import com.speedoring.modal.user.product_detail.ProductDetailMainModal;
+import com.speedoring.modal.user.product_list_home.HomeProductListMainModal;
+import com.speedoring.modal.user.product_sub_category.ProductSubCategoryMainModal;
+import com.speedoring.modal.user.service_category.ServiceCategoryMainModal;
+import com.speedoring.modal.user.service_list.ServiceListMainModal;
+import com.speedoring.modal.vendor.login_data.VendorLoginMainModal;
 import com.speedoring.utils.AppProgressDialog;
 
 import java.util.concurrent.TimeUnit;
@@ -96,48 +95,6 @@ public class RetrofitService {
 
             @Override
             public void onFailure(Call<BannerModel> call, Throwable throwable) {
-                if (dialog != null)
-                    AppProgressDialog.hide(dialog);
-                webResponse.onResponseFailed(throwable.getMessage());
-            }
-        });
-    }
-
-    public static void getPoularVendor(final Dialog dialog, final Call<StoreMainModel> method, final WebResponse webResponse) {
-        if (dialog != null)
-            AppProgressDialog.show(dialog);
-
-        method.enqueue(new Callback<StoreMainModel>() {
-            @Override
-            public void onResponse(Call<StoreMainModel> call, Response<StoreMainModel> response) {
-                if (dialog != null)
-                    AppProgressDialog.hide(dialog);
-                WebServiceResponse.handleResponse(response, webResponse);
-            }
-
-            @Override
-            public void onFailure(Call<StoreMainModel> call, Throwable throwable) {
-                if (dialog != null)
-                    AppProgressDialog.hide(dialog);
-                webResponse.onResponseFailed(throwable.getMessage());
-            }
-        });
-    }
-
-    public static void getCoupon(final Dialog dialog, final Call<CouponModel> method, final WebResponse webResponse) {
-        if (dialog != null)
-            AppProgressDialog.show(dialog);
-
-        method.enqueue(new Callback<CouponModel>() {
-            @Override
-            public void onResponse(Call<CouponModel> call, Response<CouponModel> response) {
-                if (dialog != null)
-                    AppProgressDialog.hide(dialog);
-                WebServiceResponse.handleResponse(response, webResponse);
-            }
-
-            @Override
-            public void onFailure(Call<CouponModel> call, Throwable throwable) {
                 if (dialog != null)
                     AppProgressDialog.hide(dialog);
                 webResponse.onResponseFailed(throwable.getMessage());
@@ -264,6 +221,27 @@ public class RetrofitService {
 
             @Override
             public void onFailure(Call<ProductDetailMainModal> call, Throwable throwable) {
+                if (dialog != null)
+                    AppProgressDialog.hide(dialog);
+                webResponse.onResponseFailed(throwable.getMessage());
+            }
+        });
+    }
+
+    public static void getVendorLoginData(final Dialog dialog, final Call<VendorLoginMainModal> method, final WebResponse webResponse) {
+        if (dialog != null)
+            AppProgressDialog.show(dialog);
+
+        method.enqueue(new Callback<VendorLoginMainModal>() {
+            @Override
+            public void onResponse(Call<VendorLoginMainModal> call, Response<VendorLoginMainModal> response) {
+                if (dialog != null)
+                    AppProgressDialog.hide(dialog);
+                WebServiceResponse.handleResponse(response, webResponse);
+            }
+
+            @Override
+            public void onFailure(Call<VendorLoginMainModal> call, Throwable throwable) {
                 if (dialog != null)
                     AppProgressDialog.hide(dialog);
                 webResponse.onResponseFailed(throwable.getMessage());

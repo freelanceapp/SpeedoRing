@@ -1,4 +1,4 @@
-package com.speedoring.modal.product_detail;
+package com.speedoring.modal.user.product_detail;
 
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -183,7 +183,7 @@ public class ProductListing implements Parcelable {
         this.vednorBusinessKeyword = ((String) in.readValue((String.class.getClassLoader())));
         this.vednorImage = ((String) in.readValue((String.class.getClassLoader())));
         this.vendorType = ((String) in.readValue((String.class.getClassLoader())));
-        in.readList(this.productImages, (com.speedoring.modal.product_detail.ProductImage.class.getClassLoader()));
+        in.readList(this.productImages, (com.speedoring.modal.user.product_detail.ProductImage.class.getClassLoader()));
     }
 
     public ProductListing() {

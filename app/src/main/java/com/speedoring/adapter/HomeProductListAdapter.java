@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.speedoring.R;
-import com.speedoring.modal.product_list_home.HomeProductListing;
+import com.speedoring.modal.user.product_list_home.HomeProductListing;
 import com.speedoring.ui.user.activity.UserProductDetailActivity;
 
 import java.util.List;

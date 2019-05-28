@@ -7,7 +7,8 @@ public class Constant {
 
     public static final String BASE_URL = "http://brotherforlife.in/speedoring/api/";
 
-    public static final String BANNER = "androidapi/banner.php";
+    public static final String BANNER = "banner.php";
+    /*USER*/
     public static final String SERVICE_CATEGORY = "select-services-category.php";
     public static final String SERVICE_LIST = "select-services.php";
     public static final String SERVICE_ENQUIRY = "submit-enquiry.php";
@@ -16,11 +17,10 @@ public class Constant {
     public static final String PRODUCT_LIST_HOME = "select-product-home.php";
     public static final String PRODUCT_LIST = "select-product.php";
     public static final String PRODUCT_DETAIL = "select-product-details.php";
-
-    public static final String ALL_STORE = "androidapi/all-store.php";
-    public static final String LOGIN_API = "user-login.php";
-    public static final String COUPON = "androidapi/coupon.php";
-    public static final String NOTIFICATION_LIST = "notification.php";
+    /*VENDOR*/
+    public static final String VENDOR_LOGIN = "vendor-login.php";
+    public static final String VENDOR_SIGN_UP = "vendor-signup.php";
+    public static final String OTP_VERIFY = "vendor-submit-otp.php";
 
     /* Fragment tag */
     public static final String HomeFragment = "HomeFragment";
@@ -30,6 +30,8 @@ public class Constant {
     public static final String VendorMyEnquiryFragment = "VendorMyEnquiryFragment";
 
     /* Preference */
+    public static final String IS_LOGIN = "IS_LOGIN";
+    public static final String VENDOR_DATA = "VENDOR_DATA";
     public static final String TOKEN = "TOKEN";
 
     /************************************************************************/
