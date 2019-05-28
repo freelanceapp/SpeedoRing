@@ -1,12 +1,12 @@
 package com.speedoring.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -20,16 +20,23 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
     private List<ProductCategoryList> categoryLists;
     private Context context;
     private View.OnClickListener onClickListener;
+    private int viewType;
 
-    public ProductCategoryAdapter(List<ProductCategoryList> categoryLists, Context context, View.OnClickListener onClickListener) {
+    public ProductCategoryAdapter(List<ProductCategoryList> categoryLists, Context context, View.OnClickListener onClickListener, int viewType) {
         this.categoryLists = categoryLists;
         this.context = context;
         this.onClickListener = onClickListener;
+        this.viewType = viewType;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_row_product_category, parent, false);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_row_product_category_b, parent, false);
+        /*if (viewType == 1) {
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_row_product_category, parent, false);
+        } else {
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_row_product_category_b, parent, false);
+        }*/
         return new MyViewHolder(itemView);
     }
 
@@ -47,12 +54,20 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
 
     @Override
     public int getItemCount() {
-        return categoryLists.size();
+        if (viewType == 1) {
+            return categoryLists.size();
+        } else {
+            if (categoryLists.size() > 6) {
+                return 6;
+            } else {
+                return categoryLists.size();
+            }
+        }
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        private CardView cardView;
+        private LinearLayout cardView;
         private TextView txtProductCategory;
         private ImageView imgProductCategory;
 

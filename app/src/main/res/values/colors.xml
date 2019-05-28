@@ -11,6 +11,8 @@
     <color name="pink">#e43643</color>
     <color name="white">#ffffff</color>
     <color name="white_b">#f4f4f4</color>
+    <color name="white_c">#f9f9f9</color>
+    <color name="white_d">#f6f6f6</color>
     <color name="dark_white">#f8f8f8</color>
     <color name="black">#000000</color>
 
@@ -21,6 +23,8 @@
     <color name="transparent_black">#A6000000</color>
     <color name="transparent_black_b">#66000000</color>
     <color name="transparent">#00C5C5C5</color>
+    <color name="transparent_white_a">#46FFFFFF</color>
+    <color name="transparent_white_b">#46919090</color>
 
     <color name="color_a">#F44336</color>
     <color name="color_b">#009688</color>

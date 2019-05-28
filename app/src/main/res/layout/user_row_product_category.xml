@@ -17,8 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
-            android:scaleType="centerCrop"
-            android:src="@drawable/img_service_a" />
+            android:scaleType="center"
+            android:src="@drawable/ic_default_photo" />
 
         <TextView
             android:id="@+id/txtProductCategory"

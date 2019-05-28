@@ -36,7 +36,7 @@ public class UserAllCategoryFragment extends BaseFragment implements View.OnClic
 
     private View rootView;
     private Dialog dialogSubCategory;
-    private String categoryId = "";
+    private String categoryId = "", categoryName = "";
 
     private ProductCategoryAdapter categoryAdapter;
     private List<ProductCategoryList> productCategoryLists = new ArrayList<>();
@@ -58,8 +58,8 @@ public class UserAllCategoryFragment extends BaseFragment implements View.OnClic
 
     private void init() {
         RecyclerView recyclerViewTopOffer = rootView.findViewById(R.id.recyclerViewTopOffer);
-        categoryAdapter = new ProductCategoryAdapter(productCategoryLists, mContext, this);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2);
+        categoryAdapter = new ProductCategoryAdapter(productCategoryLists, mContext, this, 1);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 3);
         recyclerViewTopOffer.setLayoutManager(gridLayoutManager);
         recyclerViewTopOffer.setItemAnimator(new DefaultItemAnimator());
         recyclerViewTopOffer.setAdapter(categoryAdapter);
@@ -97,14 +97,17 @@ public class UserAllCategoryFragment extends BaseFragment implements View.OnClic
             case R.id.cardViewPopular:
                 int pos = Integer.parseInt(v.getTag().toString());
                 categoryId = productCategoryLists.get(pos).getCategoryId();
+                categoryName = productCategoryLists.get(pos).getCatName();
                 productSubCategoryApi();
                 break;
             case R.id.cardViewSubCategory:
                 int posSubCat = Integer.parseInt(v.getTag().toString());
                 String subCategoryId = subCategoryLists.get(posSubCat).getSubCategoryId();
+                categoryName = subCategoryLists.get(posSubCat).getSubCatName();
                 Intent intent = new Intent(mContext, UserProductListActivity.class);
                 intent.putExtra("category_id", categoryId);
                 intent.putExtra("sub_category_id", subCategoryId);
+                intent.putExtra("category_name", categoryName);
                 dialogSubCategory.dismiss();
                 startActivity(intent);
                 break;
@@ -113,7 +116,7 @@ public class UserAllCategoryFragment extends BaseFragment implements View.OnClic
 
     private void productSubCategoryApi() {
         if (cd.isNetworkAvailable()) {
-            RetrofitService.getProductSubCategoryList(new Dialog(mContext), retrofitApiClient.productSubCategory("0"), new WebResponse() {
+            RetrofitService.getProductSubCategoryList(new Dialog(mContext), retrofitApiClient.productSubCategory(categoryId), new WebResponse() {
                 @Override
                 public void onResponseSuccess(Response<?> result) {
                     ProductSubCategoryMainModal mainModal = (ProductSubCategoryMainModal) result.body();
@@ -127,6 +130,7 @@ public class UserAllCategoryFragment extends BaseFragment implements View.OnClic
                         Intent intent = new Intent(mContext, UserProductListActivity.class);
                         intent.putExtra("category_id", categoryId);
                         intent.putExtra("sub_category_id", "0");
+                        intent.putExtra("category_name", categoryName);
                         startActivity(intent);
                     }
                 }
@@ -151,7 +155,7 @@ public class UserAllCategoryFragment extends BaseFragment implements View.OnClic
         if (dialogSubCategory.getWindow() != null)
             dialogSubCategory.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
 
-        RecyclerView recyclerViewSubCategory = rootView.findViewById(R.id.recyclerViewSubCategory);
+        RecyclerView recyclerViewSubCategory = dialogSubCategory.findViewById(R.id.recyclerViewSubCategory);
         subCategoryAdapter = new ProductSubCategoryAdapter(subCategoryLists, mContext, this);
         recyclerViewSubCategory.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
         recyclerViewSubCategory.setItemAnimator(new DefaultItemAnimator());

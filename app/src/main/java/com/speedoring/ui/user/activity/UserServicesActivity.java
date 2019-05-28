@@ -6,6 +6,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.speedoring.R;
 import com.speedoring.adapter.ServiceListAdapter;
@@ -25,7 +26,7 @@ public class UserServicesActivity extends BaseActivity implements View.OnClickLi
 
     private ServiceListAdapter serviceListAdapter;
     private List<ServiceList> serviceLists = new ArrayList<>();
-    private String serviceCategoryId = "";
+    private String serviceCategoryId = "", serviceCategoryName = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +37,9 @@ public class UserServicesActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void init() {
+        serviceCategoryName = getIntent().getStringExtra("category_name");
         serviceCategoryId = getIntent().getStringExtra("category_id");
+        ((TextView) findViewById(R.id.txtTitle)).setText(serviceCategoryName);
         findViewById(R.id.imgBack).setOnClickListener(this);
 
         RecyclerView recyclerViewServices = findViewById(R.id.recyclerViewServices);

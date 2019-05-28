@@ -50,6 +50,7 @@
             android:name=".ui.vendor.activity.VendorProfileActivity"
             android:label="" />
         <activity android:name=".ui.user.activity.UserProductListActivity" />
+        <activity android:name=".ui.user.activity.UserProductDetailActivity" />
 
         <meta-data
             android:name="io.fabric.ApiKey"

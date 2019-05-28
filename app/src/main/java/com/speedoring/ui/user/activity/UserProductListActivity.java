@@ -6,11 +6,14 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.widget.TextView;
 
 import com.speedoring.R;
-import com.speedoring.adapter.ServiceListAdapter;
+import com.speedoring.adapter.ProductListPaginationAdapter;
+import com.speedoring.modal.product_list_home.HomeProductListMainModal;
+import com.speedoring.modal.product_list_home.HomeProductListing;
 import com.speedoring.modal.service_list.ServiceList;
-import com.speedoring.modal.service_list.ServiceListMainModal;
+import com.speedoring.pagination_listener.PaginationScrollListener;
 import com.speedoring.retrofit_provider.RetrofitService;
 import com.speedoring.retrofit_provider.WebResponse;
 import com.speedoring.utils.Alerts;
@@ -23,9 +26,15 @@ import retrofit2.Response;
 
 public class UserProductListActivity extends BaseActivity implements View.OnClickListener {
 
-    private ServiceListAdapter serviceListAdapter;
-    private List<ServiceList> serviceLists = new ArrayList<>();
-    private String productCategoryId = "";
+    private String productCategoryId = "", subCategoryId = "", categoryName = "";
+
+    private ProductListPaginationAdapter adapter;
+    private GridLayoutManager gridLayoutManager;
+    private static final int PAGE_START = 1;
+    private int currentPage = PAGE_START;
+    private static int TOTAL_PAGES;
+    private boolean isLoading = false;
+    private boolean isLastPage = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,37 +45,99 @@ public class UserProductListActivity extends BaseActivity implements View.OnClic
     }
 
     private void init() {
+        subCategoryId = getIntent().getStringExtra("sub_category_id");
         productCategoryId = getIntent().getStringExtra("category_id");
+        categoryName = getIntent().getStringExtra("category_name");
+        ((TextView) findViewById(R.id.txtTitle)).setText(categoryName);
         findViewById(R.id.imgBack).setOnClickListener(this);
 
         RecyclerView recyclerViewProducts = findViewById(R.id.recyclerViewProducts);
-        serviceListAdapter = new ServiceListAdapter(serviceLists, mContext, this);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2);
+        adapter = new ProductListPaginationAdapter(mContext, this);
+        gridLayoutManager = new GridLayoutManager(mContext, 2);
         recyclerViewProducts.setLayoutManager(gridLayoutManager);
         recyclerViewProducts.setItemAnimator(new DefaultItemAnimator());
-        recyclerViewProducts.setAdapter(serviceListAdapter);
-        serviceListAdapter.notifyDataSetChanged();
+        recyclerViewProducts.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        recyclerViewProducts.addOnScrollListener(new PaginationScrollListener(gridLayoutManager) {
+            @Override
+            protected void loadMoreItems() {
+                isLoading = true;
+                currentPage += 1;
+                loadNextPage();
+            }
 
-        serviceListApi();
+            @Override
+            public int getTotalPageCount() {
+                return TOTAL_PAGES;
+            }
+
+            @Override
+            public boolean isLastPage() {
+                return isLastPage;
+            }
+
+            @Override
+            public boolean isLoading() {
+                return isLoading;
+            }
+        });
+
+        getHomeProductApi();
     }
 
-    private void serviceListApi() {
+    private void getHomeProductApi() {
+        currentPage = PAGE_START;
         if (cd.isNetworkAvailable()) {
-            RetrofitService.getServiceList(new Dialog(mContext), retrofitApiClient.serviceList(productCategoryId), new WebResponse() {
+            RetrofitService.getHomeProductList(new Dialog(mContext), retrofitApiClient.productList(
+                    productCategoryId, subCategoryId, "1"), new WebResponse() {
                 @Override
                 public void onResponseSuccess(Response<?> result) {
-                    ServiceListMainModal listMainModal = (ServiceListMainModal) result.body();
-                    if (listMainModal != null) {
-                        serviceLists.clear();
-                        if (!listMainModal.getResult()) {
-                            if (listMainModal.getServices().size() > 0) {
-                                serviceLists.addAll(listMainModal.getServices());
-                            }
-                        } else {
-                            Alerts.show(mContext, listMainModal.getMessage());
+                    HomeProductListMainModal mainModal = (HomeProductListMainModal) result.body();
+                    if (mainModal == null)
+                        return;
+                    if (!mainModal.getError()) {
+                        TOTAL_PAGES = mainModal.getPageCount();
+                        adapter.addAll(mainModal.getProductListing());
+                        if (currentPage < TOTAL_PAGES) {
+                            adapter.addLoadingFooter();
+                            isLastPage = false;
+                        } else if (currentPage == TOTAL_PAGES) {
+                            isLastPage = true;
                         }
+                    } else {
+                        Alerts.show(mContext, mainModal.getMessage());
                     }
-                    serviceListAdapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onResponseFailed(String error) {
+                    Alerts.show(mContext, error);
+                }
+            });
+        } else {
+            cd.show(mContext);
+        }
+    }
+
+    private void loadNextPage() {
+        if (cd.isNetworkAvailable()) {
+            RetrofitService.getHomeProductList(new Dialog(mContext), retrofitApiClient.productList(
+                    productCategoryId, subCategoryId, currentPage + ""), new WebResponse() {
+                @Override
+                public void onResponseSuccess(Response<?> result) {
+                    HomeProductListMainModal mainModal = (HomeProductListMainModal) result.body();
+                    if (mainModal == null)
+                        return;
+                    if (!mainModal.getError()) {
+                        TOTAL_PAGES = mainModal.getPageCount();
+                        adapter.removeLoadingFooter();
+                        isLoading = false;
+                        adapter.addAll(mainModal.getProductListing());
+                        if (currentPage != TOTAL_PAGES) adapter.addLoadingFooter();
+                        else isLastPage = true;
+                    } else {
+                        Alerts.show(mContext, mainModal.getMessage());
+                    }
                 }
 
                 @Override

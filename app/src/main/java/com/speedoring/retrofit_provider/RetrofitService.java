@@ -7,6 +7,7 @@ import com.speedoring.modal.banner_model.BannerModel;
 import com.speedoring.modal.coupon_model.CouponModel;
 import com.speedoring.modal.popular_vendor.StoreMainModel;
 import com.speedoring.modal.product_category.ProductCategoryMainModal;
+import com.speedoring.modal.product_detail.ProductDetailMainModal;
 import com.speedoring.modal.product_list_home.HomeProductListMainModal;
 import com.speedoring.modal.product_sub_category.ProductSubCategoryMainModal;
 import com.speedoring.modal.service_category.ServiceCategoryMainModal;
@@ -242,6 +243,27 @@ public class RetrofitService {
 
             @Override
             public void onFailure(Call<HomeProductListMainModal> call, Throwable throwable) {
+                if (dialog != null)
+                    AppProgressDialog.hide(dialog);
+                webResponse.onResponseFailed(throwable.getMessage());
+            }
+        });
+    }
+
+    public static void getProductDetail(final Dialog dialog, final Call<ProductDetailMainModal> method, final WebResponse webResponse) {
+        if (dialog != null)
+            AppProgressDialog.show(dialog);
+
+        method.enqueue(new Callback<ProductDetailMainModal>() {
+            @Override
+            public void onResponse(Call<ProductDetailMainModal> call, Response<ProductDetailMainModal> response) {
+                if (dialog != null)
+                    AppProgressDialog.hide(dialog);
+                WebServiceResponse.handleResponse(response, webResponse);
+            }
+
+            @Override
+            public void onFailure(Call<ProductDetailMainModal> call, Throwable throwable) {
                 if (dialog != null)
                     AppProgressDialog.hide(dialog);
                 webResponse.onResponseFailed(throwable.getMessage());

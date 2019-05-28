@@ -14,6 +14,8 @@ public class Constant {
     public static final String PRODUCT_CATEGORY = "select-product-category.php";
     public static final String PRODUCT_SUB_CATEGORY = "select-product-sub-category.php";
     public static final String PRODUCT_LIST_HOME = "select-product-home.php";
+    public static final String PRODUCT_LIST = "select-product.php";
+    public static final String PRODUCT_DETAIL = "select-product-details.php";
 
     public static final String ALL_STORE = "androidapi/all-store.php";
     public static final String LOGIN_API = "user-login.php";

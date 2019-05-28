@@ -35,12 +35,12 @@ public class ProductSubCategoryAdapter extends RecyclerView.Adapter<ProductSubCa
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        holder.txtProductCategory.setText(categoryLists.get(position).getCatName());
+        holder.txtProductCategory.setText(categoryLists.get(position).getSubCatName());
         holder.cardView.setTag(position);
         holder.cardView.setOnClickListener(onClickListener);
 
         Glide.with(context)
-                .load(categoryLists.get(position).getCatImage())
+                .load(categoryLists.get(position).getImages())
                 .placeholder(R.drawable.ic_default_photo)
                 .into(holder.imgProductCategory);
     }

@@ -1,18 +1,19 @@
 package com.speedoring.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.CardView;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.speedoring.R;
 import com.speedoring.modal.product_list_home.HomeProductListing;
-import com.speedoring.utils.Alerts;
+import com.speedoring.ui.user.activity.UserProductDetailActivity;
 
 import java.util.List;
 
@@ -35,14 +36,16 @@ public class HomeProductListAdapter extends RecyclerView.Adapter<HomeProductList
     }
 
     @Override
-    public void onBindViewHolder(MyViewHolder holder, int position) {
+    public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.txtProductTitle.setText(reviewModelList.get(position).getListingName());
         holder.txtProductDes.setText(reviewModelList.get(position).getDescription());
 
-        holder.cardViewProduct.setOnClickListener(new View.OnClickListener() {
+        holder.llTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Alerts.show(context, "Under development...!!!");
+                Intent intent = new Intent(context, UserProductDetailActivity.class);
+                intent.putExtra("product_id", reviewModelList.get(position).getListingId());
+                context.startActivity(intent);
             }
         });
 
@@ -60,11 +63,11 @@ public class HomeProductListAdapter extends RecyclerView.Adapter<HomeProductList
 
         public ImageView imgProduct;
         private TextView txtProductTitle, txtProductDes;
-        private CardView cardViewProduct;
+        private LinearLayout llTop;
 
         public MyViewHolder(View view) {
             super(view);
-            cardViewProduct = view.findViewById(R.id.cardViewProduct);
+            llTop = view.findViewById(R.id.llTop);
             imgProduct = view.findViewById(R.id.imgProduct);
             txtProductTitle = view.findViewById(R.id.txtProductTitle);
             txtProductDes = view.findViewById(R.id.txtProductDes);

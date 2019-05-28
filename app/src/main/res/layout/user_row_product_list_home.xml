@@ -6,25 +6,26 @@
     android:orientation="horizontal">
 
     <android.support.v7.widget.CardView
-        android:id="@+id/cardViewProduct"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:cardCornerRadius="8dp"
         app:cardElevation="4dp">
 
         <LinearLayout
+            android:id="@+id/llTop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
             android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/imgProduct"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="120dp"
                 android:adjustViewBounds="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/img_service_a" />
+                android:scaleType="center"
+                android:src="@drawable/ic_default_photo" />
 
             <TextView
                 android:id="@+id/txtProductTitle"
@@ -34,7 +35,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
                 android:ellipsize="end"
-                android:maxLines="2"
+                android:maxLines="1"
                 android:text="Service Title"
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp"

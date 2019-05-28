@@ -35,6 +35,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:ellipsize="end"
+                    android:lines="1"
                     android:text="Products"
                     android:textColor="@color/white"
                     android:textSize="20sp" />

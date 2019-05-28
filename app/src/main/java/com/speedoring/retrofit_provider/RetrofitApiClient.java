@@ -5,6 +5,7 @@ import com.speedoring.modal.banner_model.BannerModel;
 import com.speedoring.modal.coupon_model.CouponModel;
 import com.speedoring.modal.popular_vendor.StoreMainModel;
 import com.speedoring.modal.product_category.ProductCategoryMainModal;
+import com.speedoring.modal.product_detail.ProductDetailMainModal;
 import com.speedoring.modal.product_list_home.HomeProductListMainModal;
 import com.speedoring.modal.product_sub_category.ProductSubCategoryMainModal;
 import com.speedoring.modal.service_category.ServiceCategoryMainModal;
@@ -50,6 +51,15 @@ public interface RetrofitApiClient {
 
     @FormUrlEncoded
     @POST(Constant.PRODUCT_SUB_CATEGORY)
-    Call<ProductSubCategoryMainModal> productSubCategory(@Field("category_id") String category_call);
+    Call<ProductSubCategoryMainModal> productSubCategory(@Field("category_id") String category_id);
+
+    @FormUrlEncoded
+    @POST(Constant.PRODUCT_LIST)
+    Call<HomeProductListMainModal> productList(@Field("category_id") String category_id, @Field("sub_category_id") String sub_category_id,
+                                               @Field("page_number") String page_number);
+
+    @FormUrlEncoded
+    @POST(Constant.PRODUCT_DETAIL)
+    Call<ProductDetailMainModal> productDetail(@Field("listing_id") String product_id);
 
 }

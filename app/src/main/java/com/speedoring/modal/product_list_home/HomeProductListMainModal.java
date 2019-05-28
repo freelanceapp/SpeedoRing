@@ -17,6 +17,12 @@ public class HomeProductListMainModal implements Parcelable {
     @SerializedName("message")
     @Expose
     private String message;
+    @SerializedName("page_count")
+    @Expose
+    private Integer pageCount;
+    @SerializedName("current_page")
+    @Expose
+    private String currentPage;
     @SerializedName("product_listing")
     @Expose
     private List<HomeProductListing> productListing = new ArrayList<HomeProductListing>();
@@ -39,6 +45,8 @@ public class HomeProductListMainModal implements Parcelable {
     protected HomeProductListMainModal(Parcel in) {
         this.error = ((Boolean) in.readValue((Boolean.class.getClassLoader())));
         this.message = ((String) in.readValue((String.class.getClassLoader())));
+        this.pageCount= ((Integer) in.readValue((String.class.getClassLoader())));
+        this.currentPage= ((String) in.readValue((String.class.getClassLoader())));
         in.readList(this.productListing, (HomeProductListing.class.getClassLoader()));
     }
 
@@ -69,9 +77,27 @@ public class HomeProductListMainModal implements Parcelable {
         this.productListing = productListing;
     }
 
+    public Integer getPageCount() {
+        return pageCount;
+    }
+
+    public void setPageCount(Integer pageCount) {
+        this.pageCount = pageCount;
+    }
+
+    public String getCurrentPage() {
+        return currentPage;
+    }
+
+    public void setCurrentPage(String currentPage) {
+        this.currentPage = currentPage;
+    }
+
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeValue(error);
         dest.writeValue(message);
+        dest.writeValue(pageCount);
+        dest.writeValue(currentPage);
         dest.writeList(productListing);
     }
 
