@@ -2,11 +2,12 @@ package com.speedoring.modal.vendor.login_data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
+import android.os.Parcelable.Creator;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Vendorinfo implements Parcelable {
+public class Vendorinfo implements Parcelable
+{
 
     @SerializedName("vendor_id")
     @Expose
@@ -74,6 +75,18 @@ public class Vendorinfo implements Parcelable {
     @SerializedName("mobile_two")
     @Expose
     private String mobileTwo;
+    @SerializedName("fax_one")
+    @Expose
+    private String faxOne;
+    @SerializedName("fax_two")
+    @Expose
+    private String faxTwo;
+    @SerializedName("tollfree_one")
+    @Expose
+    private String tollfreeOne;
+    @SerializedName("tollfree_two")
+    @Expose
+    private String tollfreeTwo;
     @SerializedName("email")
     @Expose
     private String email;
@@ -109,7 +122,8 @@ public class Vendorinfo implements Parcelable {
             return (new Vendorinfo[size]);
         }
 
-    };
+    }
+            ;
 
     protected Vendorinfo(Parcel in) {
         this.vendorId = ((String) in.readValue((String.class.getClassLoader())));
@@ -134,6 +148,10 @@ public class Vendorinfo implements Parcelable {
         this.landlineTwo = ((String) in.readValue((String.class.getClassLoader())));
         this.mobileOne = ((String) in.readValue((String.class.getClassLoader())));
         this.mobileTwo = ((String) in.readValue((String.class.getClassLoader())));
+        this.faxOne = ((String) in.readValue((String.class.getClassLoader())));
+        this.faxTwo = ((String) in.readValue((String.class.getClassLoader())));
+        this.tollfreeOne = ((String) in.readValue((String.class.getClassLoader())));
+        this.tollfreeTwo = ((String) in.readValue((String.class.getClassLoader())));
         this.email = ((String) in.readValue((String.class.getClassLoader())));
         this.website = ((String) in.readValue((String.class.getClassLoader())));
         this.category = ((String) in.readValue((String.class.getClassLoader())));
@@ -322,6 +340,38 @@ public class Vendorinfo implements Parcelable {
         this.mobileTwo = mobileTwo;
     }
 
+    public String getFaxOne() {
+        return faxOne;
+    }
+
+    public void setFaxOne(String faxOne) {
+        this.faxOne = faxOne;
+    }
+
+    public String getFaxTwo() {
+        return faxTwo;
+    }
+
+    public void setFaxTwo(String faxTwo) {
+        this.faxTwo = faxTwo;
+    }
+
+    public String getTollfreeOne() {
+        return tollfreeOne;
+    }
+
+    public void setTollfreeOne(String tollfreeOne) {
+        this.tollfreeOne = tollfreeOne;
+    }
+
+    public String getTollfreeTwo() {
+        return tollfreeTwo;
+    }
+
+    public void setTollfreeTwo(String tollfreeTwo) {
+        this.tollfreeTwo = tollfreeTwo;
+    }
+
     public String getEmail() {
         return email;
     }
@@ -401,6 +451,10 @@ public class Vendorinfo implements Parcelable {
         dest.writeValue(landlineTwo);
         dest.writeValue(mobileOne);
         dest.writeValue(mobileTwo);
+        dest.writeValue(faxOne);
+        dest.writeValue(faxTwo);
+        dest.writeValue(tollfreeOne);
+        dest.writeValue(tollfreeTwo);
         dest.writeValue(email);
         dest.writeValue(website);
         dest.writeValue(category);

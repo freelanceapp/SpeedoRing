@@ -13,10 +13,11 @@ import android.view.ViewGroup;
 
 import com.speedoring.R;
 import com.speedoring.adapter.BannerPagerAdapter;
-import com.speedoring.adapter.TodaysOfferAdapter;
+import com.speedoring.adapter.EnquiryListPaginationAdapter;
+import com.speedoring.modal.User;
 import com.speedoring.modal.banner_model.BannerDatum;
 import com.speedoring.modal.banner_model.BannerModel;
-import com.speedoring.modal.coupon_model.CouponDatum;
+import com.speedoring.modal.vendor.enquiry_list.VendorEnquiryMainModal;
 import com.speedoring.retrofit_provider.RetrofitService;
 import com.speedoring.retrofit_provider.WebResponse;
 import com.speedoring.utils.Alerts;
@@ -35,11 +36,11 @@ public class VendorHomeFragment extends BaseFragment implements View.OnClickList
     private Handler imageHandler;
     private Runnable imageRunnable;
     private ViewPager pagerSuccess;
-    private BannerPagerAdapter adapter;
+    private BannerPagerAdapter bannerAdapter;
     private List<BannerDatum> successImagesList = new ArrayList<>();
 
-    private TodaysOfferAdapter todaysOfferAdapter;
-    private List<CouponDatum> stylesList = new ArrayList<>();
+    private String vendorId = User.getUser().getVendorId();
+    private EnquiryListPaginationAdapter adapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,7 +57,7 @@ public class VendorHomeFragment extends BaseFragment implements View.OnClickList
 
     private void initPager() {
         pagerSuccess = rootView.findViewById(R.id.pagerSuccess);
-        adapter = new BannerPagerAdapter(mContext, successImagesList, this);
+        bannerAdapter = new BannerPagerAdapter(mContext, successImagesList, this);
         imagesApi();
         imageHandler = new Handler();
         imageRunnable = new Runnable() {
@@ -84,12 +85,13 @@ public class VendorHomeFragment extends BaseFragment implements View.OnClickList
 
     private void init() {
         RecyclerView recyclerViewEnquiry = rootView.findViewById(R.id.recyclerViewEnquiry);
-        todaysOfferAdapter = new TodaysOfferAdapter(stylesList, mContext, this);
-        recyclerViewEnquiry.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+        adapter = new EnquiryListPaginationAdapter(mContext, this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false);
+        recyclerViewEnquiry.setLayoutManager(linearLayoutManager);
         recyclerViewEnquiry.setItemAnimator(new DefaultItemAnimator());
-        recyclerViewEnquiry.setAdapter(todaysOfferAdapter);
-        todaysOfferAdapter.notifyDataSetChanged();
-        getCoupon1();
+        recyclerViewEnquiry.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        getEnquiryApi();
     }
 
     private void imagesApi() {
@@ -102,8 +104,8 @@ public class VendorHomeFragment extends BaseFragment implements View.OnClickList
                     if (imagesModal == null)
                         return;
                     successImagesList.addAll(imagesModal.getData());
-                    pagerSuccess.setAdapter(adapter);
-                    adapter.notifyDataSetChanged();
+                    pagerSuccess.setAdapter(bannerAdapter);
+                    bannerAdapter.notifyDataSetChanged();
                 }
 
                 @Override
@@ -114,18 +116,22 @@ public class VendorHomeFragment extends BaseFragment implements View.OnClickList
         }
     }
 
-    private void getCoupon1() {
+    private void getEnquiryApi() {
         if (cd.isNetworkAvailable()) {
-/*
-            RetrofitService.getCoupon(new Dialog(mContext), retrofitApiClient.getCoupon(), new WebResponse() {
+            RetrofitService.getVendorEnquiryList(new Dialog(mContext), retrofitApiClient.vendorEnquiryList(vendorId,
+                    "1"), new WebResponse() {
                 @Override
                 public void onResponseSuccess(Response<?> result) {
-                    CouponModel mainModal = (CouponModel) result.body();
+                    VendorEnquiryMainModal mainModal = (VendorEnquiryMainModal) result.body();
                     if (mainModal == null)
                         return;
-
-                    stylesList.addAll(mainModal.getData());
-                    todaysOfferAdapter.notifyDataSetChanged();
+                    adapter.getProductList().clear();
+                    if (!mainModal.getError()) {
+                        adapter.addAll(mainModal.getEnquiry());
+                        // adapter.removeLoadingFooter();
+                    } else {
+                        Alerts.show(mContext, mainModal.getMessage());
+                    }
                 }
 
                 @Override
@@ -133,7 +139,6 @@ public class VendorHomeFragment extends BaseFragment implements View.OnClickList
                     Alerts.show(mContext, error);
                 }
             });
-*/
         } else {
             cd.show(mContext);
         }

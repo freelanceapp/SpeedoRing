@@ -2,7 +2,6 @@ package com.speedoring.modal.vendor.login_data;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.os.Parcelable.Creator;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -15,7 +14,7 @@ public class VendorLoginMainModal implements Parcelable {
     @SerializedName("message")
     @Expose
     private String message;
-    @SerializedName("vendorinfo")
+    @SerializedName("vendor_profile")
     @Expose
     private Vendorinfo vendorinfo;
     public final static Parcelable.Creator<VendorLoginMainModal> CREATOR = new Creator<VendorLoginMainModal>() {

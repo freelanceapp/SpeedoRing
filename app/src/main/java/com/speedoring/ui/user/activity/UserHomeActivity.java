@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.speedoring.R;
 import com.speedoring.constant.Constant;
+import com.speedoring.interface_update_data.ViewMoreInterface;
 import com.speedoring.ui.user.fragment.HomeFragment;
 import com.speedoring.ui.user.fragment.UserAllCategoryFragment;
 import com.speedoring.ui.vendor.activity.SignInActivity;
@@ -19,6 +20,7 @@ public class UserHomeActivity extends BaseActivity implements View.OnClickListen
     private TextView txtTitle;
     public static FragmentUtils fragmentUtils;
     private FragmentManager fragmentManager;
+    private HomeFragment homeFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +43,17 @@ public class UserHomeActivity extends BaseActivity implements View.OnClickListen
         fragmentManager = getSupportFragmentManager();
         fragmentUtils = new FragmentUtils(fragmentManager);
         txtTitle.setText("Home");
-        fragmentUtils.replaceFragment(new HomeFragment(), Constant.HomeFragment, R.id.frameLayout);
+
+        homeFragment = new HomeFragment();
+        homeFragment.clickedInterface(new ViewMoreInterface() {
+            @Override
+            public void isClicked(Boolean isClick) {
+                if (isClick) {
+                    findViewById(R.id.llCategory).performClick();
+                }
+            }
+        });
+        fragmentUtils.replaceFragment(homeFragment, Constant.HomeFragment, R.id.frameLayout);
         findViewById(R.id.llHome).setBackgroundColor(getResources().getColor(R.color.colorAccent));
         findViewById(R.id.llCategory).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
         findViewById(R.id.llLogin).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
@@ -52,7 +64,7 @@ public class UserHomeActivity extends BaseActivity implements View.OnClickListen
         switch (v.getId()) {
             case R.id.llHome:
                 txtTitle.setText("Home");
-                fragmentUtils.replaceFragment(new HomeFragment(), Constant.HomeFragment, R.id.frameLayout);
+                fragmentUtils.replaceFragment(homeFragment, Constant.HomeFragment, R.id.frameLayout);
                 findViewById(R.id.llHome).setBackgroundColor(getResources().getColor(R.color.colorAccent));
                 findViewById(R.id.llCategory).setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                 findViewById(R.id.llLogin).setBackgroundColor(getResources().getColor(R.color.colorPrimary));

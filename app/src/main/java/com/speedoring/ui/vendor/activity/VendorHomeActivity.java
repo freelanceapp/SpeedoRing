@@ -1,10 +1,14 @@
 package com.speedoring.ui.vendor.activity;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -16,21 +20,31 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.diegodobelo.expandingview.ExpandingItem;
 import com.diegodobelo.expandingview.ExpandingList;
 import com.speedoring.R;
 import com.speedoring.constant.Constant;
+import com.speedoring.modal.User;
+import com.speedoring.ui.user.activity.UserHomeActivity;
 import com.speedoring.ui.vendor.fragment.VendorHomeFragment;
 import com.speedoring.ui.vendor.fragment.VendorListingFragment;
 import com.speedoring.ui.vendor.fragment.VendorMyEnquiryFragment;
+import com.speedoring.utils.Alerts;
+import com.speedoring.utils.AppPreference;
 import com.speedoring.utils.BaseActivity;
 import com.speedoring.utils.FragmentUtils;
+import com.speedoring.utils.ImageUtil;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class VendorHomeActivity extends BaseActivity implements View.OnClickListener {
 
-    private DrawerLayout drawerLayout;
+    boolean doubleBackToExitPressedOnce = false;
+
     private View contentView;
+    private DrawerLayout drawerLayout;
     public static Toolbar toolbar;
 
     private TextView txtTitle;
@@ -39,8 +53,10 @@ public class VendorHomeActivity extends BaseActivity implements View.OnClickList
     private ImageView imgDropDown;
     private boolean isRotate = false;
     private LinearLayout llMenu;
-
     private ExpandingList mExpandingList;
+
+    /******************************/
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,17 +73,25 @@ public class VendorHomeActivity extends BaseActivity implements View.OnClickList
         llMenu = findViewById(R.id.llMenu);
         txtTitle = findViewById(R.id.txtTitle);
         txtTitle.setText("Home");
+
         findViewById(R.id.tvProfile).setOnClickListener(this);
+        findViewById(R.id.llHome).setOnClickListener(this);
         findViewById(R.id.rlListing).setOnClickListener(this);
         findViewById(R.id.tvAddListing).setOnClickListener(this);
         findViewById(R.id.tvListing).setOnClickListener(this);
         findViewById(R.id.txtMyEnquiries).setOnClickListener(this);
+        findViewById(R.id.llBuyLeads).setOnClickListener(this);
         findViewById(R.id.txtNotification).setOnClickListener(this);
+        findViewById(R.id.txtLogout).setOnClickListener(this);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
         contentView = findViewById(R.id.container);
+
+        ImageUtil.Glide(mContext, ((CircleImageView) findViewById(R.id.imgVendorProfile)), User.getUser().getImage());
+        ((TextView) findViewById(R.id.txtVendorName)).setText(User.getUser().getFirstName() + " " + User.getUser().getLastName());
+        ((TextView) findViewById(R.id.txtContact)).setText(User.getUser().getMobileNumber());
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout,
                 toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close) {
@@ -114,6 +138,11 @@ public class VendorHomeActivity extends BaseActivity implements View.OnClickList
                 drawerLayout.closeDrawer(GravityCompat.START);
                 openPopup();
                 break;
+            case R.id.llHome:
+                drawerLayout.closeDrawer(GravityCompat.START);
+                txtTitle.setText("Home");
+                fragmentUtils.replaceFragment(new VendorHomeFragment(), Constant.VendorHomeFragment, R.id.frameLayout);
+                break;
             case R.id.tvListing:
                 drawerLayout.closeDrawer(GravityCompat.START);
                 txtTitle.setText("Listing");
@@ -121,17 +150,27 @@ public class VendorHomeActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.txtMyEnquiries:
                 drawerLayout.closeDrawer(GravityCompat.START);
-                txtTitle.setText("My Enquiry");
+                txtTitle.setText("My VendorEnquiryList");
                 fragmentUtils.replaceFragment(new VendorMyEnquiryFragment(), Constant.VendorMyEnquiryFragment, R.id.frameLayout);
                 break;
             case R.id.txtNotification:
                 drawerLayout.closeDrawer(GravityCompat.START);
-                txtTitle.setText("Notification");
-                fragmentUtils.replaceFragment(new VendorMyEnquiryFragment(), Constant.VendorMyEnquiryFragment, R.id.frameLayout);
+                Alerts.show(mContext, "Under development...!!!");
+                /*txtTitle.setText("Notification");
+                fragmentUtils.replaceFragment(new VendorMyEnquiryFragment(), Constant.VendorMyEnquiryFragment, R.id.frameLayout);*/
+                break;
+            case R.id.llBuyLeads:
+                drawerLayout.closeDrawer(GravityCompat.START);
+                Alerts.show(mContext, "Under development...!!!");
+                /*txtTitle.setText("Notification");
+                fragmentUtils.replaceFragment(new VendorMyEnquiryFragment(), Constant.VendorMyEnquiryFragment, R.id.frameLayout);*/
                 break;
             case R.id.tvProfile:
                 drawerLayout.closeDrawer(GravityCompat.START);
                 startActivity(new Intent(mContext, VendorProfileActivity.class));
+                break;
+            case R.id.txtLogout:
+                logout();
                 break;
             case R.id.rlListing:
                 if (isRotate) {
@@ -145,6 +184,28 @@ public class VendorHomeActivity extends BaseActivity implements View.OnClickList
                 }
                 break;
         }
+    }
+
+    private void logout() {
+        new AlertDialog.Builder(mContext)
+                .setTitle("Logout")
+                .setMessage("Are you sure want to logout ?")
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        AppPreference.clearAllPreferences(mContext);
+                        Intent intent = new Intent(mContext, UserHomeActivity.class);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        intent.addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+                        startActivity(intent);
+                        finish();
+                    }
+                })
+                .setNegativeButton("NO", null)
+                .create()
+                .show();
     }
 
     private void openPopup() {
@@ -196,7 +257,8 @@ public class VendorHomeActivity extends BaseActivity implements View.OnClickList
                 switch (txt) {
                     case "Add Listing":
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        openPopup();
+                        Intent intent = new Intent(mContext, VendorAddListingActivity.class);
+                        startActivity(intent);
                         break;
                     case "View Listing":
                         drawerLayout.closeDrawer(GravityCompat.START);
@@ -207,4 +269,64 @@ public class VendorHomeActivity extends BaseActivity implements View.OnClickList
             }
         });
     }
+
+    /**********************************************************************************************/
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (AppPreference.getBooleanPreference(mContext, Constant.IS_ITEM_ADDED)) {
+            AppPreference.setBooleanPreference(mContext, Constant.IS_ITEM_ADDED, false);
+            txtTitle.setText("Listing");
+            fragmentUtils.replaceFragment(new VendorListingFragment(), Constant.VendorListingFragment, R.id.frameLayout);
+        }
+
+        if (AppPreference.getBooleanPreference(mContext, Constant.IS_VENDOR_DATA_UPDATE)) {
+            AppPreference.setBooleanPreference(mContext, Constant.IS_VENDOR_DATA_UPDATE, false);
+            ImageUtil.Glide(mContext, ((CircleImageView) findViewById(R.id.imgVendorProfile)), User.getUser().getImage());
+            ((TextView) findViewById(R.id.txtVendorName)).setText(User.getUser().getFirstName() + " " + User.getUser().getLastName());
+            ((TextView) findViewById(R.id.txtContact)).setText(User.getUser().getMobileNumber());
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        Fragment HomeFragment = fragmentManager.findFragmentByTag(Constant.HomeFragment);
+        Fragment VendorListingFragmentTag = fragmentManager.findFragmentByTag(Constant.VendorListingFragment);
+        Fragment VendorMyEnquiryFragmentTag = fragmentManager.findFragmentByTag(Constant.VendorMyEnquiryFragment);
+
+        if (VendorListingFragmentTag != null) {
+            txtTitle.setText("Home");
+            fragmentUtils.replaceFragment(new VendorHomeFragment(), Constant.VendorHomeFragment, R.id.frameLayout);
+        } else if (VendorMyEnquiryFragmentTag != null) {
+            txtTitle.setText("Home");
+            fragmentUtils.replaceFragment(new VendorHomeFragment(), Constant.VendorHomeFragment, R.id.frameLayout);
+        } else if (HomeFragment != null) {
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed();
+                return;
+            }
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
+        } else {
+            if (doubleBackToExitPressedOnce) {
+                super.onBackPressed();
+                return;
+            }
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    doubleBackToExitPressedOnce = false;
+                }
+            }, 2000);
+        }
+    }
+
 }

@@ -21,6 +21,15 @@ public class Constant {
     public static final String VENDOR_LOGIN = "vendor-login.php";
     public static final String VENDOR_SIGN_UP = "vendor-signup.php";
     public static final String OTP_VERIFY = "vendor-submit-otp.php";
+    public static final String PROFILE_DATA = "vendor-profile.php";
+    public static final String UPLOAD_PROFILE_IMAGE = "vendor-profile-image-update.php";
+    public static final String UPDATE_PERSONAL_INFO = "vendor-profile-update.php";
+    public static final String UPDATE_BUSINESS_INFO = "vendor-profile-business-update.php";
+    public static final String UPDATE_CONTACT_INFO = "vendor-profile-contact.php";
+    public static final String VENDOR_PRODUCT_LIST = "select-vendor-product.php";
+    public static final String VENDOR_PRODUCT_DELETE = "vendor-listing-delete.php";
+    public static final String VENDOR_ADD_PRODUCT = "vendor-listing-insert.php";
+    public static final String VENDOR_ENQUIRY_LIST = "vendor-enquiry-listing.php";
 
     /* Fragment tag */
     public static final String HomeFragment = "HomeFragment";
@@ -31,11 +40,13 @@ public class Constant {
 
     /* Preference */
     public static final String IS_LOGIN = "IS_LOGIN";
+    public static final String IS_ITEM_ADDED = "IS_ITEM_ADDED";
+    public static final String IS_VENDOR_DATA_UPDATE = "IS_VENDOR_DATA_UPDATE";
     public static final String VENDOR_DATA = "VENDOR_DATA";
     public static final String TOKEN = "TOKEN";
 
     /************************************************************************/
-    public static final String IMAGE = "https://www.grabbuddy.in/admin/images/company_picture/";
+    // public static final String IMAGE = "https://www.grabbuddy.in/admin/images/company_picture/";
     public static final String IMAGE5 = "https://www.grabbuddy.in/admin/images/bannar_picture/";
 
     public static boolean isValidEmailId(String email) {

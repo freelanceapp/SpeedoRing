@@ -1,6 +1,8 @@
 package com.speedoring.ui.user.activity;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.speedoring.R;
 import com.speedoring.adapter.ProductImagesAdapter;
 import com.speedoring.constant.Constant;
+import com.speedoring.modal.User;
 import com.speedoring.modal.user.product_detail.ProductDetailMainModal;
 import com.speedoring.modal.user.product_detail.ProductImage;
 import com.speedoring.retrofit_provider.RetrofitService;
@@ -35,7 +38,7 @@ import retrofit2.Response;
 
 public class UserProductDetailActivity extends BaseActivity implements View.OnClickListener {
 
-    private String productId = "";
+    private String productId = "", from = "";
     private List<ProductImage> productImages = new ArrayList<>();
     private ProductImagesAdapter imagesAdapter;
 
@@ -50,8 +53,18 @@ public class UserProductDetailActivity extends BaseActivity implements View.OnCl
     private void init() {
         findViewById(R.id.imgBack).setOnClickListener(this);
         findViewById(R.id.btnEnquiry).setOnClickListener(this);
+        findViewById(R.id.imgDelete).setOnClickListener(this);
 
         productId = getIntent().getStringExtra("product_id");
+        from = getIntent().getStringExtra("from");
+
+        if (from.equalsIgnoreCase("user")) {
+            findViewById(R.id.imgDelete).setVisibility(View.GONE);
+            findViewById(R.id.btnEnquiry).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.imgDelete).setVisibility(View.VISIBLE);
+            findViewById(R.id.btnEnquiry).setVisibility(View.GONE);
+        }
 
         imagesAdapter = new ProductImagesAdapter(productImages, mContext, this);
         RecyclerView rvProductImage = findViewById(R.id.rvProductImage);
@@ -109,6 +122,9 @@ public class UserProductDetailActivity extends BaseActivity implements View.OnCl
         switch (v.getId()) {
             case R.id.imgBack:
                 finish();
+                break;
+            case R.id.imgDelete:
+                deleteDialog();
                 break;
             case R.id.btnEnquiry:
                 openPopup();
@@ -199,5 +215,51 @@ public class UserProductDetailActivity extends BaseActivity implements View.OnCl
         Window window = dialogEnquiry.getWindow();
         window.setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
         dialogEnquiry.show();
+    }
+
+    private void deleteDialog() {
+        new AlertDialog.Builder(mContext)
+                .setTitle("Delete")
+                .setMessage("Are you sure want to delete item ?")
+                .setPositiveButton("YES", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        productDeleteApi();
+                    }
+                })
+                .setNegativeButton("NO", null)
+                .create()
+                .show();
+    }
+
+    private void productDeleteApi() {
+        String vendorId = User.getUser().getVendorId();
+        if (cd.isNetworkAvailable()) {
+            RetrofitService.getContentData(new Dialog(mContext), retrofitApiClient.vendorProductDelete(vendorId , productId), new WebResponse() {
+                @Override
+                public void onResponseSuccess(Response<?> result) {
+                    ResponseBody responseBody = (ResponseBody) result.body();
+                    try {
+                        JSONObject jsonObject = new JSONObject(responseBody.string());
+                        if (!jsonObject.getBoolean("error")) {
+                            Alerts.show(mContext, jsonObject.getString("message"));
+                        } else {
+                            Alerts.show(mContext, jsonObject.getString("message"));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onResponseFailed(String error) {
+
+                }
+            });
+        } else {
+            cd.show(mContext);
+        }
     }
 }

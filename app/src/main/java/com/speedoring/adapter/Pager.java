@@ -4,6 +4,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
+import com.speedoring.interface_update_data.UpdateInterface;
 import com.speedoring.ui.vendor.fragment.profile.VendorBusinessInfoFragment;
 import com.speedoring.ui.vendor.fragment.profile.VendorContactInfoFragment;
 import com.speedoring.ui.vendor.fragment.profile.VendorPersonalInfoFragment;
@@ -11,15 +12,15 @@ import com.speedoring.ui.vendor.fragment.profile.VendorPersonalInfoFragment;
 public class Pager extends FragmentStatePagerAdapter {
 
     //integer to count number of tabs
-    int tabCount;
-
+    private int tabCount;
     private String[] tabTitles = new String[]{"Personal", "Business", "Contact"};
+    private UpdateInterface updateInterface;
 
     //Constructor to the class
-    public Pager(FragmentManager fm, int tabCount) {
+    public Pager(FragmentManager fm, int tabCount, UpdateInterface updateInterface) {
         super(fm);
-        //Initializing tab count
         this.tabCount = tabCount;
+        this.updateInterface = updateInterface;
     }
 
     @Override
@@ -33,11 +34,17 @@ public class Pager extends FragmentStatePagerAdapter {
         //Returning the current tabs
         switch (position) {
             case 0:
-                return new VendorPersonalInfoFragment();
+                VendorPersonalInfoFragment personalInfoFragment = new VendorPersonalInfoFragment();
+                personalInfoFragment.setUpdateInterface(updateInterface);
+                return personalInfoFragment;
             case 1:
-                return new VendorBusinessInfoFragment();
+                VendorBusinessInfoFragment businessInfoFragment = new VendorBusinessInfoFragment();
+                businessInfoFragment.setUpdateInterface(updateInterface);
+                return businessInfoFragment;
             case 2:
-                return new VendorContactInfoFragment();
+                VendorContactInfoFragment contactInfoFragment = new VendorContactInfoFragment();
+                contactInfoFragment.setUpdateInterface(updateInterface);
+                return contactInfoFragment;
             default:
                 return null;
         }

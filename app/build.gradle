@@ -68,10 +68,11 @@ dependencies {
     //implementation 'com.nineoldandroids:library:2.4.0'
 
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'com.karumi:dexter:4.2.0'
+    implementation 'com.karumi:dexter:5.0.0'
     implementation 'com.facebook.android:facebook-login:4.40.0'
     implementation 'com.google.android.gms:play-services-auth:16.0.1'
     implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation project(path: ':expanding-view')
+    implementation project(path: ':ucrop')
 
 }

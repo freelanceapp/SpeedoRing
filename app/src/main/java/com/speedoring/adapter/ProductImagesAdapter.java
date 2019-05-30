@@ -42,7 +42,7 @@ public class ProductImagesAdapter extends RecyclerView.Adapter<ProductImagesAdap
         viewHolder.cardViewProduct.setOnClickListener(onClickListener);
         Glide.with(context)
                 .load(productImages.get(i).getProdcutImage())
-                .placeholder(R.drawable.ic_profile)
+                .placeholder(R.drawable.ic_default_photo_b)
                 .into(viewHolder.imgProduct);
     }
 

@@ -59,7 +59,7 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
     }
 
     private void loginApi() {
-        String strPhone = ((EditText) findViewById(R.id.edtPhone)).getText().toString();
+        final String strPhone = ((EditText) findViewById(R.id.edtPhone)).getText().toString();
         String strPassword = ((EditText) findViewById(R.id.edtPassword)).getText().toString();
 
         if (strPhone.isEmpty()) {
@@ -68,8 +68,6 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
             Alerts.show(findViewById(R.id.rlContainer), "Enter valid Phone No...!!!");
         } else if (strPassword.isEmpty()) {
             Alerts.show(findViewById(R.id.rlContainer), "Password can't be empty...!!!");
-        } else if (strPassword.length() < 6) {
-            Alerts.show(findViewById(R.id.rlContainer), "Password length must be greater than 5...!!!");
         } else {
             if (cd.isNetworkAvailable()) {
                 RetrofitService.getVendorLoginData(new Dialog(mContext), retrofitApiClient.vendorLogin(strPhone, strPassword), new WebResponse() {
@@ -80,7 +78,7 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                             return;
                         if (!loginMainModal.getError()) {
                             Gson gson = new GsonBuilder().setLenient().create();
-                            String data = gson.toJson(loginMainModal);
+                            String data = gson.toJson(loginMainModal.getVendorinfo());
                             AppPreference.setBooleanPreference(mContext, Constant.IS_LOGIN, true);
                             AppPreference.setStringPreference(mContext, Constant.VENDOR_DATA, data);
                             User.setUser(loginMainModal.getVendorinfo());
@@ -92,7 +90,15 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                             startActivity(intent);
                             finish();
                         } else {
-                            Alerts.show(findViewById(R.id.rlContainer), loginMainModal.getMessage());
+                            if (loginMainModal.getMessage().equalsIgnoreCase("User is not verified")) {
+                                Alerts.show(mContext, loginMainModal.getMessage());
+                                Alerts.show(mContext, "Please verify your phone number");
+                                Intent intent = new Intent(mContext, OtpVerificationActivity.class);
+                                intent.putExtra("phone", strPhone);
+                                startActivity(intent);
+                            }else {
+                                Alerts.show(findViewById(R.id.rlContainer), loginMainModal.getMessage());
+                            }
                         }
                     }
 

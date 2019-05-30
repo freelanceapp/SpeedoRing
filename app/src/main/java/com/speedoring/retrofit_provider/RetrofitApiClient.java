@@ -8,14 +8,20 @@ import com.speedoring.modal.user.product_list_home.HomeProductListMainModal;
 import com.speedoring.modal.user.product_sub_category.ProductSubCategoryMainModal;
 import com.speedoring.modal.user.service_category.ServiceCategoryMainModal;
 import com.speedoring.modal.user.service_list.ServiceListMainModal;
+import com.speedoring.modal.vendor.enquiry_list.VendorEnquiryMainModal;
 import com.speedoring.modal.vendor.login_data.VendorLoginMainModal;
+import com.speedoring.modal.vendor.vendor_product_list.VendorProductListMainModal;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
+import retrofit2.http.Part;
 
 public interface RetrofitApiClient {
 
@@ -72,4 +78,56 @@ public interface RetrofitApiClient {
     @FormUrlEncoded
     @POST(Constant.OTP_VERIFY)
     Call<ResponseBody> otpVerification(@Field("mobile_no") String mobile_no, @Field("otp_no") String otp_no);
+
+    @Multipart
+    @POST(Constant.UPLOAD_PROFILE_IMAGE)
+    Call<ResponseBody> uploadProfile(@Part("user_id") RequestBody userid, @Part MultipartBody.Part image);
+
+    @FormUrlEncoded
+    @POST(Constant.PROFILE_DATA)
+    Call<VendorLoginMainModal> vendorProfileData(@Field("user_id") String userid);
+
+    @FormUrlEncoded
+    @POST(Constant.UPDATE_PERSONAL_INFO)
+    Call<ResponseBody> updatePersonalInfo(@Field("user_id") String user_id, @Field("first_name") String first_name,
+                                          @Field("last_name") String last_name, @Field("country") String country,
+                                          @Field("address") String address, @Field("city") String city,
+                                          @Field("state") String state, @Field("pincode") String pincode);
+
+    @FormUrlEncoded
+    @POST(Constant.UPDATE_BUSINESS_INFO)
+    Call<ResponseBody> updateBusinessInfo(@Field("user_id") String user_id, @Field("business_name") String business_name,
+                                          @Field("business_nature") String business_nature, @Field("business_category") String business_category,
+                                          @Field("business_tin") String business_tin, @Field("business_address") String business_address,
+                                          @Field("business_city") String business_city, @Field("business_pincode") String business_pincode,
+                                          @Field("business_area") String business_area, @Field("business_country") String business_country,
+                                          @Field("business_keyword") String business_keyword);
+
+    @FormUrlEncoded
+    @POST(Constant.UPDATE_CONTACT_INFO)
+    Call<ResponseBody> updateContactInfo(@Field("user_id") String user_id, @Field("landline_one") String landline_one,
+                                         @Field("landline_two") String landline_two, @Field("mobile_one") String mobile_one,
+                                         @Field("mobile_two") String mobile_two, @Field("fax_one") String fax_one,
+                                         @Field("fax_two") String fax_two, @Field("tollfree_one") String tollfree_one,
+                                         @Field("tollfree_two") String tollfree_two, @Field("website") String website,
+                                         @Field("email") String email);
+
+    @FormUrlEncoded
+    @POST(Constant.VENDOR_PRODUCT_LIST)
+    Call<VendorProductListMainModal> vendorProductList(@Field("vendor_id") String vendor_id, @Field("page_number") String page_number);
+
+    @FormUrlEncoded
+    @POST(Constant.VENDOR_PRODUCT_DELETE)
+    Call<ResponseBody> vendorProductDelete(@Field("vendor_id") String vendor_id, @Field("listing_id") String listing_id);
+
+    @Multipart
+    @POST(Constant.VENDOR_ADD_PRODUCT)
+    Call<ResponseBody> vendorAddProduct(@Part("vendor_id") RequestBody vendor_id, @Part("category_id") RequestBody category_id,
+                                        @Part("sub_category_id") RequestBody sub_category_id, @Part("listing_name") RequestBody listing_name,
+                                        @Part("description") RequestBody description, @Part MultipartBody.Part images[]);
+
+    @FormUrlEncoded
+    @POST(Constant.VENDOR_ENQUIRY_LIST)
+    Call<VendorEnquiryMainModal> vendorEnquiryList(@Field("user_id") String user_id, @Field("page_number") String page_number);
+
 }

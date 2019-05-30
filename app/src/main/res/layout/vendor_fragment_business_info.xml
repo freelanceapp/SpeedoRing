@@ -3,183 +3,235 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
-    android:paddingBottom="20dp"
-    android:fillViewport="true">
+    android:fillViewport="true"
+    android:paddingBottom="20dp">
 
     <LinearLayout
+        android:id="@+id/llContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="16dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Business Name"
-            android:textSize="12sp" />
-
-        <TextView
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/edit_bg"
-            android:gravity="center_vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="Business Name"
-            android:textColor="@color/text_color_a" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Business Category"
-            android:textSize="12sp" />
+            android:background="@drawable/edittext_focus_tint_b"
+            android:paddingTop="4dp">
 
-        <TextView
+            <EditText
+                android:id="@+id/edtBusinessName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:hint="Business Name"
+                android:inputType="text"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:textSize="14sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/edit_bg"
-            android:gravity="center_vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="Business Category"
-            android:textColor="@color/text_color_a" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Business Keywords"
-            android:textSize="12sp" />
+            android:background="@drawable/edittext_focus_tint_b"
+            android:paddingTop="4dp">
 
-        <TextView
+            <EditText
+                android:id="@+id/edtBusinessCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:hint="Business Category"
+                android:inputType="text"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:textSize="14sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/edit_bg"
-            android:gravity="center_vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="Business Keywords"
-            android:textColor="@color/text_color_a" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Business Nature"
-            android:textSize="12sp" />
+            android:background="@drawable/edittext_focus_tint_b"
+            android:paddingTop="4dp">
 
-        <TextView
+            <EditText
+                android:id="@+id/edtBusinessKeywords"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:hint="Business Keywords"
+                android:inputType="text"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:textSize="14sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/edit_bg"
-            android:gravity="center_vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="Business Nature"
-            android:textColor="@color/text_color_a" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Business Tin"
-            android:textSize="12sp" />
+            android:background="@drawable/edittext_focus_tint_b"
+            android:paddingTop="4dp">
 
-        <TextView
+            <EditText
+                android:id="@+id/edtBusinessNature"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:hint="Business Nature"
+                android:inputType="text"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:textSize="14sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/edit_bg"
-            android:gravity="center_vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="Business Tin"
-            android:textColor="@color/text_color_a" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Business Address"
-            android:textSize="12sp" />
+            android:background="@drawable/edittext_focus_tint_b"
+            android:paddingTop="4dp">
 
-        <TextView
+            <EditText
+                android:id="@+id/edtBusinessTin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:hint="Business Tin"
+                android:inputType="text"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:textSize="14sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/edit_bg"
-            android:gravity="center_vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="Business Address"
-            android:textColor="@color/text_color_a" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Business City"
-            android:textSize="12sp" />
+            android:background="@drawable/edittext_focus_tint_b"
+            android:paddingTop="4dp">
 
-        <TextView
+            <EditText
+                android:id="@+id/edtBusinessAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:hint="Business Address"
+                android:inputType="text"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:textSize="14sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/edit_bg"
-            android:gravity="center_vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="Business City"
-            android:textColor="@color/text_color_a" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Business Pin Code"
-            android:textSize="12sp" />
+            android:background="@drawable/edittext_focus_tint_b"
+            android:paddingTop="4dp">
 
-        <TextView
+            <EditText
+                android:id="@+id/edtBusinessCity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:hint="Business City"
+                android:inputType="text"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:textSize="14sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/edit_bg"
-            android:gravity="center_vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="Business Pin Code"
-            android:textColor="@color/text_color_a" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Business Area"
-            android:textSize="12sp" />
+            android:background="@drawable/edittext_focus_tint_b"
+            android:paddingTop="4dp">
 
-        <TextView
+            <EditText
+                android:id="@+id/edtBusinessPinCode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:hint="Business Pin Code"
+                android:inputType="number"
+                android:maxLength="6"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:textSize="14sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/edit_bg"
-            android:gravity="center_vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="Business Area"
-            android:textColor="@color/text_color_a" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Business Country"
-            android:textSize="12sp" />
+            android:background="@drawable/edittext_focus_tint_b"
+            android:paddingTop="4dp">
 
-        <TextView
+            <EditText
+                android:id="@+id/edtBusinessArea"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:hint="Business Area"
+                android:inputType="text"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:textSize="14sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:background="@drawable/edit_bg"
-            android:gravity="center_vertical"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
-            android:text="Business Country"
-            android:textColor="@color/text_color_a" />
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/edittext_focus_tint_b"
+            android:paddingTop="4dp">
 
+            <EditText
+                android:id="@+id/edtBusinessCountry"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                android:hint="Business Country"
+                android:inputType="text"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:textSize="14sp" />
+        </android.support.design.widget.TextInputLayout>
+
+        <Button
+            android:id="@+id/btnUpdate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/button_ripple_b"
+            android:text="update"
+            android:textColor="@color/white" />
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

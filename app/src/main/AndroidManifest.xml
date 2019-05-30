@@ -52,6 +52,18 @@
         <activity android:name=".ui.user.activity.UserProductListActivity" />
         <activity android:name=".ui.user.activity.UserProductDetailActivity" />
         <activity android:name=".ui.vendor.activity.OtpVerificationActivity" />
+        <activity android:name=".ui.vendor.activity.ImagePickerActivity" />
+        <activity android:name="com.yalantis.ucrop.UCropActivity" />
+        <activity android:name=".utils.multi_image_picker.CustomGalleryActivity">
+            <intent-filter>
+                <action android:name="speedoring.ACTION_MULTIPLE_PICK" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".ui.vendor.activity.VendorAddListingActivity"
+            android:windowSoftInputMode="adjustPan" />
 
         <meta-data
             android:name="io.fabric.ApiKey"

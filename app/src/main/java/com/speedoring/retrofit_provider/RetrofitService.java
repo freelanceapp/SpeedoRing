@@ -10,7 +10,9 @@ import com.speedoring.modal.user.product_list_home.HomeProductListMainModal;
 import com.speedoring.modal.user.product_sub_category.ProductSubCategoryMainModal;
 import com.speedoring.modal.user.service_category.ServiceCategoryMainModal;
 import com.speedoring.modal.user.service_list.ServiceListMainModal;
+import com.speedoring.modal.vendor.enquiry_list.VendorEnquiryMainModal;
 import com.speedoring.modal.vendor.login_data.VendorLoginMainModal;
+import com.speedoring.modal.vendor.vendor_product_list.VendorProductListMainModal;
 import com.speedoring.utils.AppProgressDialog;
 
 import java.util.concurrent.TimeUnit;
@@ -242,6 +244,48 @@ public class RetrofitService {
 
             @Override
             public void onFailure(Call<VendorLoginMainModal> call, Throwable throwable) {
+                if (dialog != null)
+                    AppProgressDialog.hide(dialog);
+                webResponse.onResponseFailed(throwable.getMessage());
+            }
+        });
+    }
+
+    public static void getVendorProductList(final Dialog dialog, final Call<VendorProductListMainModal> method, final WebResponse webResponse) {
+        if (dialog != null)
+            AppProgressDialog.show(dialog);
+
+        method.enqueue(new Callback<VendorProductListMainModal>() {
+            @Override
+            public void onResponse(Call<VendorProductListMainModal> call, Response<VendorProductListMainModal> response) {
+                if (dialog != null)
+                    AppProgressDialog.hide(dialog);
+                WebServiceResponse.handleResponse(response, webResponse);
+            }
+
+            @Override
+            public void onFailure(Call<VendorProductListMainModal> call, Throwable throwable) {
+                if (dialog != null)
+                    AppProgressDialog.hide(dialog);
+                webResponse.onResponseFailed(throwable.getMessage());
+            }
+        });
+    }
+
+    public static void getVendorEnquiryList(final Dialog dialog, final Call<VendorEnquiryMainModal> method, final WebResponse webResponse) {
+        if (dialog != null)
+            AppProgressDialog.show(dialog);
+
+        method.enqueue(new Callback<VendorEnquiryMainModal>() {
+            @Override
+            public void onResponse(Call<VendorEnquiryMainModal> call, Response<VendorEnquiryMainModal> response) {
+                if (dialog != null)
+                    AppProgressDialog.hide(dialog);
+                WebServiceResponse.handleResponse(response, webResponse);
+            }
+
+            @Override
+            public void onFailure(Call<VendorEnquiryMainModal> call, Throwable throwable) {
                 if (dialog != null)
                     AppProgressDialog.hide(dialog);
                 webResponse.onResponseFailed(throwable.getMessage());

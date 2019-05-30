@@ -56,12 +56,29 @@
                 android:layout_marginBottom="4dp" />
         </android.support.v7.widget.CardView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:padding="8dp"
-            android:text="Product Category" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:padding="8dp"
+                android:text="Product Category" />
+
+            <TextView
+                android:id="@+id/txtViewMore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="8dp"
+                android:text="View More"
+                android:textColor="@color/colorAccent" />
+        </RelativeLayout>
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"

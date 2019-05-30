@@ -53,37 +53,41 @@
                                 android:padding="16dp"
                                 android:src="@drawable/app_logo" />
 
-                            <de.hdodenhof.circleimageview.CircleImageView
-                                android:id="@+id/imgVendorProfile"
-                                android:layout_width="80dp"
-                                android:layout_height="80dp"
-                                android:layout_below="@+id/splash_logo"
-                                android:background="@drawable/circle_background"
-                                android:src="@drawable/img_service_a"
-                                app:civ_border_color="@color/gray_h"
-                                app:civ_border_width="1dp" />
-
-                            <TextView
-                                android:id="@+id/txtVendorName"
-                                android:layout_width="wrap_content"
+                            <RelativeLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_above="@+id/txtContact"
-                                android:layout_marginStart="8dp"
-                                android:layout_marginTop="20dp"
-                                android:layout_toEndOf="@+id/imgVendorProfile"
-                                android:text="Vendor Name"
-                                android:textColor="@color/white"
-                                android:textSize="16sp" />
+                                android:layout_below="@+id/splash_logo">
 
-                            <TextView
-                                android:id="@+id/txtContact"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_alignBottom="@+id/imgVendorProfile"
-                                android:layout_marginStart="8dp"
-                                android:layout_toEndOf="@+id/imgVendorProfile"
-                                android:text="9876543120"
-                                android:textColor="@color/white" />
+                                <de.hdodenhof.circleimageview.CircleImageView
+                                    android:id="@+id/imgVendorProfile"
+                                    android:layout_width="80dp"
+                                    android:layout_height="80dp"
+                                    android:background="@drawable/circle_background"
+                                    android:src="@drawable/img_service_a"
+                                    app:civ_border_color="@color/gray_h"
+                                    app:civ_border_width="1dp" />
+
+                                <TextView
+                                    android:id="@+id/txtVendorName"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_marginTop="20dp"
+                                    android:layout_toEndOf="@+id/imgVendorProfile"
+                                    android:text="Vendor Name"
+                                    android:textColor="@color/white"
+                                    android:textSize="16sp" />
+
+                                <TextView
+                                    android:id="@+id/txtContact"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@+id/txtVendorName"
+                                    android:layout_marginStart="8dp"
+                                    android:layout_toEndOf="@+id/imgVendorProfile"
+                                    android:text="9876543120"
+                                    android:textColor="@color/white" />
+                            </RelativeLayout>
                         </RelativeLayout>
 
                         <LinearLayout
@@ -120,6 +124,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/llHome"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
@@ -269,6 +274,7 @@
                         </LinearLayout>
 
                         <LinearLayout
+                            android:id="@+id/llBuyLeads"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
@@ -313,8 +319,8 @@
                                 <ImageView
                                     android:layout_width="24dp"
                                     android:layout_height="24dp"
-                                    android:layout_margin="8dp"
                                     android:layout_centerHorizontal="true"
+                                    android:layout_margin="8dp"
                                     android:src="@drawable/ic_notifications"
                                     android:tint="@color/gray_a" />
                             </RelativeLayout>
@@ -374,6 +380,7 @@
                                 android:textColor="@color/black" />
 
                             <TextView
+                                android:id="@+id/txtLogout"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="16dp"

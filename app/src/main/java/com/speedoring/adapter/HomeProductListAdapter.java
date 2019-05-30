@@ -45,6 +45,7 @@ public class HomeProductListAdapter extends RecyclerView.Adapter<HomeProductList
             public void onClick(View v) {
                 Intent intent = new Intent(context, UserProductDetailActivity.class);
                 intent.putExtra("product_id", reviewModelList.get(position).getListingId());
+                intent.putExtra("from", "user");
                 context.startActivity(intent);
             }
         });

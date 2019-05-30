@@ -71,6 +71,7 @@ public class ProductListPaginationAdapter extends RecyclerView.Adapter<RecyclerV
                     public void onClick(View v) {
                         Intent intent = new Intent(context, UserProductDetailActivity.class);
                         intent.putExtra("product_id", productListings.get(position).getListingId());
+                        intent.putExtra("from", "user");
                         context.startActivity(intent);
                         //Alerts.show(context, "Under development...!!!");
                     }

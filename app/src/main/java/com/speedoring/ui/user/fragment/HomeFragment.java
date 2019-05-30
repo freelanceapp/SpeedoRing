@@ -21,6 +21,7 @@ import com.speedoring.adapter.HomeProductListAdapter;
 import com.speedoring.adapter.ProductCategoryAdapter;
 import com.speedoring.adapter.ProductSubCategoryAdapter;
 import com.speedoring.adapter.ServiceCategoryAdapter;
+import com.speedoring.interface_update_data.ViewMoreInterface;
 import com.speedoring.modal.banner_model.BannerDatum;
 import com.speedoring.modal.banner_model.BannerModel;
 import com.speedoring.modal.user.product_category.ProductCategoryList;
@@ -51,6 +52,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private List<ProductSubCategory> subCategoryLists = new ArrayList<>();
     private Dialog dialogSubCategory;
 
+    private ViewMoreInterface viewMoreInterface;
+
     private Handler imageHandler;
     private Runnable imageRunnable;
     private ViewPager pagerSuccess;
@@ -76,6 +79,10 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         initPager();
         init();
         return rootView;
+    }
+
+    public void clickedInterface(ViewMoreInterface viewMoreInterface) {
+        this.viewMoreInterface = viewMoreInterface;
     }
 
     private void initPager() {
@@ -107,6 +114,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     }
 
     private void init() {
+        rootView.findViewById(R.id.txtViewMore).setOnClickListener(this);
+
         RecyclerView rvPopularVendor = rootView.findViewById(R.id.rvPopularVendor);
         serviceCategoryAdapter = new ServiceCategoryAdapter(servicesCategoryList, mContext, this);
         rvPopularVendor.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
@@ -156,7 +165,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     private void productCategoryApi() {
         if (cd.isNetworkAvailable()) {
-            RetrofitService.getProductCategoryList(new Dialog(mContext), retrofitApiClient.productCategory("0"), new WebResponse() {
+            RetrofitService.getProductCategoryList(new Dialog(mContext), retrofitApiClient.productCategory("1"), new WebResponse() {
                 @Override
                 public void onResponseSuccess(Response<?> result) {
                     ProductCategoryMainModal mainModal = (ProductCategoryMainModal) result.body();
@@ -229,6 +238,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.txtViewMore:
+                viewMoreInterface.isClicked(true);
+                break;
             case R.id.cardViewPopular:
                 int pos = Integer.parseInt(v.getTag().toString());
                 categoryId = productCategoryLists.get(pos).getCategoryId();
