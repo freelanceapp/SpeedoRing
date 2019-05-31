@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "1070795071162",
-    "firebase_url": "https://pinlinx-6a36e.firebaseio.com",
-    "project_id": "pinlinx-6a36e",
-    "storage_bucket": "pinlinx-6a36e.appspot.com"
+    "project_number": "624429589298",
+    "firebase_url": "https://speedoring-ea4df.firebaseio.com",
+    "project_id": "speedoring-ea4df",
+    "storage_bucket": "speedoring-ea4df.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1070795071162:android:c5bd28540d78511a",
+        "mobilesdk_app_id": "1:624429589298:android:bd0cc694ab933e88",
         "android_client_info": {
           "package_name": "com.speedoring"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1070795071162-nj8m2p9dj5rvh7ukdb48hjmbpdh1961e.apps.googleusercontent.com",
+          "client_id": "624429589298-0u28q3fb4r1te3mtqgoci4cm9p9tanpf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.speedoring",
@@ -23,74 +23,23 @@
           }
         },
         {
-          "client_id": "1070795071162-mvt5m596kdsvjeq5k3ua1d03ekpf8cfn.apps.googleusercontent.com",
+          "client_id": "624429589298-bhrl3a1qjpk0ic5dbms07dnn38c3ptrb.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyD0gU4WcSUD3jpU23FgWg1lMjECKYkU0x8"
+          "current_key": "AIzaSyCoXVGJa7n_VMfn4sdvJQLqIz4YL_SEWUo"
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
-              "client_id": "1070795071162-mvt5m596kdsvjeq5k3ua1d03ekpf8cfn.apps.googleusercontent.com",
+              "client_id": "624429589298-bhrl3a1qjpk0ic5dbms07dnn38c3ptrb.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:1070795071162:android:4a972554510782f0",
-        "android_client_info": {
-          "package_name": "technology.infobite.com.sportsforsports"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "1070795071162-h4lluo9069ivq9v5l5et0guu3qkljbn4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "technology.infobite.com.sportsforsports",
-            "certificate_hash": "6d9b846d9ea1d7eb3bb83ed18d22ebcbb15f6d0f"
-          }
-        },
-        {
-          "client_id": "1070795071162-mvt5m596kdsvjeq5k3ua1d03ekpf8cfn.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyD0gU4WcSUD3jpU23FgWg1lMjECKYkU0x8"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 2,
-          "other_platform_oauth_client": [
-            {
-              "client_id": "1070795071162-mvt5m596kdsvjeq5k3ua1d03ekpf8cfn.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }

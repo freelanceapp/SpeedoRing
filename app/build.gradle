@@ -75,4 +75,5 @@ dependencies {
     implementation project(path: ':expanding-view')
     implementation project(path: ':ucrop')
 
+    implementation 'com.instamojo:android-sdk:2.0.1'
 }

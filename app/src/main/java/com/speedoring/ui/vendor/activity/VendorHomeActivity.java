@@ -31,6 +31,7 @@ import com.speedoring.ui.user.activity.UserHomeActivity;
 import com.speedoring.ui.vendor.fragment.VendorHomeFragment;
 import com.speedoring.ui.vendor.fragment.VendorListingFragment;
 import com.speedoring.ui.vendor.fragment.VendorMyEnquiryFragment;
+import com.speedoring.ui.vendor.fragment.VendorNotificationFragment;
 import com.speedoring.utils.Alerts;
 import com.speedoring.utils.AppPreference;
 import com.speedoring.utils.BaseActivity;
@@ -155,9 +156,8 @@ public class VendorHomeActivity extends BaseActivity implements View.OnClickList
                 break;
             case R.id.txtNotification:
                 drawerLayout.closeDrawer(GravityCompat.START);
-                Alerts.show(mContext, "Under development...!!!");
-                /*txtTitle.setText("Notification");
-                fragmentUtils.replaceFragment(new VendorMyEnquiryFragment(), Constant.VendorMyEnquiryFragment, R.id.frameLayout);*/
+                txtTitle.setText("Notification");
+                fragmentUtils.replaceFragment(new VendorNotificationFragment(), Constant.VendorNotificationFragment, R.id.frameLayout);
                 break;
             case R.id.llBuyLeads:
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -293,11 +293,15 @@ public class VendorHomeActivity extends BaseActivity implements View.OnClickList
         Fragment HomeFragment = fragmentManager.findFragmentByTag(Constant.HomeFragment);
         Fragment VendorListingFragmentTag = fragmentManager.findFragmentByTag(Constant.VendorListingFragment);
         Fragment VendorMyEnquiryFragmentTag = fragmentManager.findFragmentByTag(Constant.VendorMyEnquiryFragment);
+        Fragment VendorNotificationFragmentTag = fragmentManager.findFragmentByTag(Constant.VendorNotificationFragment);
 
         if (VendorListingFragmentTag != null) {
             txtTitle.setText("Home");
             fragmentUtils.replaceFragment(new VendorHomeFragment(), Constant.VendorHomeFragment, R.id.frameLayout);
         } else if (VendorMyEnquiryFragmentTag != null) {
+            txtTitle.setText("Home");
+            fragmentUtils.replaceFragment(new VendorHomeFragment(), Constant.VendorHomeFragment, R.id.frameLayout);
+        } else if (VendorNotificationFragmentTag != null) {
             txtTitle.setText("Home");
             fragmentUtils.replaceFragment(new VendorHomeFragment(), Constant.VendorHomeFragment, R.id.frameLayout);
         } else if (HomeFragment != null) {

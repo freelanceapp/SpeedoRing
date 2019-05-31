@@ -37,6 +37,7 @@ public class Constant {
     public static final String VendorHomeFragment = "VendorHomeFragment";
     public static final String VendorListingFragment = "VendorListingFragment";
     public static final String VendorMyEnquiryFragment = "VendorMyEnquiryFragment";
+    public static final String VendorNotificationFragment = "VendorNotificationFragment";
 
     /* Preference */
     public static final String IS_LOGIN = "IS_LOGIN";
