@@ -32,6 +32,7 @@ import com.speedoring.ui.vendor.fragment.VendorHomeFragment;
 import com.speedoring.ui.vendor.fragment.VendorListingFragment;
 import com.speedoring.ui.vendor.fragment.VendorMyEnquiryFragment;
 import com.speedoring.ui.vendor.fragment.VendorNotificationFragment;
+import com.speedoring.ui.vendor.fragment.VendorPrivacyFragment;
 import com.speedoring.utils.Alerts;
 import com.speedoring.utils.AppPreference;
 import com.speedoring.utils.BaseActivity;
@@ -83,6 +84,9 @@ public class VendorHomeActivity extends BaseActivity implements View.OnClickList
         findViewById(R.id.txtMyEnquiries).setOnClickListener(this);
         findViewById(R.id.llBuyLeads).setOnClickListener(this);
         findViewById(R.id.txtNotification).setOnClickListener(this);
+        findViewById(R.id.txtPrivacy).setOnClickListener(this);
+        findViewById(R.id.txtTermsCondition).setOnClickListener(this);
+        findViewById(R.id.txtAboutUs).setOnClickListener(this);
         findViewById(R.id.txtLogout).setOnClickListener(this);
 
         toolbar = findViewById(R.id.toolbar);
@@ -134,6 +138,8 @@ public class VendorHomeActivity extends BaseActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+        VendorPrivacyFragment privacyFragment = new VendorPrivacyFragment();
+        Bundle bundle = new Bundle();
         switch (v.getId()) {
             case R.id.tvAddListing:
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -164,6 +170,27 @@ public class VendorHomeActivity extends BaseActivity implements View.OnClickList
                 Alerts.show(mContext, "Under development...!!!");
                 /*txtTitle.setText("Notification");
                 fragmentUtils.replaceFragment(new VendorMyEnquiryFragment(), Constant.VendorMyEnquiryFragment, R.id.frameLayout);*/
+                break;
+            case R.id.txtPrivacy:
+                drawerLayout.closeDrawer(GravityCompat.START);
+                txtTitle.setText("Privacy Policy");
+                bundle.putString("type", "privacy");
+                privacyFragment.setArguments(bundle);
+                fragmentUtils.replaceFragment(privacyFragment, Constant.VendorPrivacyFragment, R.id.frameLayout);
+                break;
+            case R.id.txtTermsCondition:
+                drawerLayout.closeDrawer(GravityCompat.START);
+                txtTitle.setText("Terms & Conditions");
+                bundle.putString("type", "terms");
+                privacyFragment.setArguments(bundle);
+                fragmentUtils.replaceFragment(privacyFragment, Constant.VendorPrivacyFragment, R.id.frameLayout);
+                break;
+            case R.id.txtAboutUs:
+                drawerLayout.closeDrawer(GravityCompat.START);
+                txtTitle.setText("About Us");
+                bundle.putString("type", "about");
+                privacyFragment.setArguments(bundle);
+                fragmentUtils.replaceFragment(privacyFragment, Constant.VendorPrivacyFragment, R.id.frameLayout);
                 break;
             case R.id.tvProfile:
                 drawerLayout.closeDrawer(GravityCompat.START);
@@ -294,6 +321,7 @@ public class VendorHomeActivity extends BaseActivity implements View.OnClickList
         Fragment VendorListingFragmentTag = fragmentManager.findFragmentByTag(Constant.VendorListingFragment);
         Fragment VendorMyEnquiryFragmentTag = fragmentManager.findFragmentByTag(Constant.VendorMyEnquiryFragment);
         Fragment VendorNotificationFragmentTag = fragmentManager.findFragmentByTag(Constant.VendorNotificationFragment);
+        Fragment VendorPrivacyFragmentTag = fragmentManager.findFragmentByTag(Constant.VendorPrivacyFragment);
 
         if (VendorListingFragmentTag != null) {
             txtTitle.setText("Home");
@@ -302,6 +330,9 @@ public class VendorHomeActivity extends BaseActivity implements View.OnClickList
             txtTitle.setText("Home");
             fragmentUtils.replaceFragment(new VendorHomeFragment(), Constant.VendorHomeFragment, R.id.frameLayout);
         } else if (VendorNotificationFragmentTag != null) {
+            txtTitle.setText("Home");
+            fragmentUtils.replaceFragment(new VendorHomeFragment(), Constant.VendorHomeFragment, R.id.frameLayout);
+        } else if (VendorPrivacyFragmentTag != null) {
             txtTitle.setText("Home");
             fragmentUtils.replaceFragment(new VendorHomeFragment(), Constant.VendorHomeFragment, R.id.frameLayout);
         } else if (HomeFragment != null) {

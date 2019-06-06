@@ -64,6 +64,13 @@
         <activity
             android:name=".ui.vendor.activity.VendorAddListingActivity"
             android:windowSoftInputMode="adjustPan" />
+        <activity android:name=".ui.MainActivity">
+            <!--<intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>-->
+        </activity>
 
         <meta-data
             android:name="io.fabric.ApiKey"

@@ -119,6 +119,17 @@ public class VendorAddListingActivity extends BaseActivity implements View.OnCli
         subCategoryAdapter = new SpinnerSubCategoryAdapter(mContext, R.layout.spinner_category_list, subCategoryLists);
         subCategoryAdapter.setDropDownViewResource(simple_spinner_dropdown_item);
         spinnerSubCategory.setAdapter(subCategoryAdapter);
+        spinnerSubCategory.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                strSubCategoryId = subCategoryLists.get(position).getSubCategoryId();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         productCategoryApi();
     }
@@ -283,6 +294,9 @@ public class VendorAddListingActivity extends BaseActivity implements View.OnCli
         } else if (filePaths.size() == 0) {
             Alerts.show(mContext, "Select at least one image...!!!");
         } else {
+            if (strSubCategoryId.isEmpty()) {
+                strSubCategoryId = "0";
+            }
             RequestBody _vendorId = RequestBody.create(MediaType.parse("text/plain"), vendorId);
             RequestBody _categoryId = RequestBody.create(MediaType.parse("text/plain"), strCategoryId);
             RequestBody _subCategoryId = RequestBody.create(MediaType.parse("text/plain"), strSubCategoryId);

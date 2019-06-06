@@ -7,10 +7,11 @@ import android.support.v7.app.AppCompatActivity;
 import com.speedoring.R;
 import com.speedoring.retrofit_provider.RetrofitApiClient;
 import com.speedoring.retrofit_provider.RetrofitService;
+import com.speedoring.retrofit_provider.RetrofitServiceInstaMojo;
 
 public class BaseActivity extends AppCompatActivity {
 
-    public RetrofitApiClient retrofitApiClient;
+    public RetrofitApiClient retrofitApiClient, retrofitApiClientInstaMojo;
     public ConnectionDetector cd;
     public Context mContext;
 
@@ -21,5 +22,6 @@ public class BaseActivity extends AppCompatActivity {
         mContext = this;
         cd = new ConnectionDetector(mContext);
         retrofitApiClient = RetrofitService.getRetrofit();
+        retrofitApiClientInstaMojo = RetrofitServiceInstaMojo.getRetrofit();
     }
 }

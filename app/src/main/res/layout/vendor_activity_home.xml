@@ -360,12 +360,14 @@
                             android:orientation="vertical">
 
                             <TextView
+                                android:id="@+id/txtPrivacy"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:text="Privacy Policy"
                                 android:textColor="@color/black" />
 
                             <TextView
+                                android:id="@+id/txtTermsCondition"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="16dp"
@@ -373,6 +375,7 @@
                                 android:textColor="@color/black" />
 
                             <TextView
+                                android:id="@+id/txtAboutUs"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="16dp"

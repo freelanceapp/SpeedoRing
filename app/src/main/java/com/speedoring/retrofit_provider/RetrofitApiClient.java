@@ -2,6 +2,9 @@ package com.speedoring.retrofit_provider;
 
 import com.speedoring.constant.Constant;
 import com.speedoring.modal.banner_model.BannerModel;
+import com.speedoring.modal.insta_mojo.GatewayOrderStatus;
+import com.speedoring.modal.insta_mojo.GetOrderIDRequest;
+import com.speedoring.modal.insta_mojo.GetOrderIDResponse;
 import com.speedoring.modal.user.product_category.ProductCategoryMainModal;
 import com.speedoring.modal.user.product_detail.ProductDetailMainModal;
 import com.speedoring.modal.user.product_list_home.HomeProductListMainModal;
@@ -16,12 +19,14 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 public interface RetrofitApiClient {
 
@@ -130,4 +135,17 @@ public interface RetrofitApiClient {
     @POST(Constant.VENDOR_ENQUIRY_LIST)
     Call<VendorEnquiryMainModal> vendorEnquiryList(@Field("user_id") String user_id, @Field("page_number") String page_number);
 
+    /******************************************************************************/
+    /*******************************Insta mojo*************************/
+    @POST("/order")
+    Call<GetOrderIDResponse> createOrder(@Body GetOrderIDRequest request);
+
+    @GET("/status")
+    Call<GatewayOrderStatus> orderStatus(@Query("env") String env, @Query("order_id") String orderID,
+                                         @Query("transaction_id") String transactionID);
+
+    @POST("/refund")
+    Call<ResponseBody> refundAmount(@Query("env") String env,
+                                    @Query("transaction_id") String transaction_id,
+                                    @Query("amount") String amount);
 }
