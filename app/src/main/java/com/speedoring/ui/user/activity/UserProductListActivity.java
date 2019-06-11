@@ -3,7 +3,7 @@ package com.speedoring.ui.user.activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -24,7 +24,7 @@ public class UserProductListActivity extends BaseActivity implements View.OnClic
     private String productCategoryId = "", subCategoryId = "", categoryName = "";
 
     private ProductListPaginationAdapter adapter;
-    private GridLayoutManager gridLayoutManager;
+    private LinearLayoutManager gridLayoutManager;
     private static final int PAGE_START = 1;
     private int currentPage = PAGE_START;
     private static int TOTAL_PAGES;
@@ -48,7 +48,7 @@ public class UserProductListActivity extends BaseActivity implements View.OnClic
 
         RecyclerView recyclerViewProducts = findViewById(R.id.recyclerViewProducts);
         adapter = new ProductListPaginationAdapter(mContext, this);
-        gridLayoutManager = new GridLayoutManager(mContext, 2);
+        gridLayoutManager = new LinearLayoutManager(mContext);
         recyclerViewProducts.setLayoutManager(gridLayoutManager);
         recyclerViewProducts.setItemAnimator(new DefaultItemAnimator());
         recyclerViewProducts.setAdapter(adapter);

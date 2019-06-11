@@ -2,8 +2,8 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/rlContainer"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:ignore="TextFields,UnusedAttribute">
 
@@ -131,7 +131,8 @@
             android:gravity="center"
             android:padding="16dp"
             android:text="Forgot Password ?"
-            android:textColor="@color/black" />
+            android:textColor="@color/black"
+            android:visibility="gone" />
     </LinearLayout>
 
 </RelativeLayout>

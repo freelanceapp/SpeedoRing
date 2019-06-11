@@ -1,9 +1,11 @@
 package com.speedoring.ui.user.activity;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
+import android.view.WindowManager;
 
 import com.crashlytics.android.Crashlytics;
 import com.google.gson.Gson;
@@ -23,6 +25,8 @@ public class SplashScreen extends BaseActivity implements View.OnClickListener {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash_screen);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         handlerTimer();
     }
 

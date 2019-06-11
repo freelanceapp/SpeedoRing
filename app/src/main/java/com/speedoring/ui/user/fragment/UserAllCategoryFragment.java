@@ -59,7 +59,7 @@ public class UserAllCategoryFragment extends BaseFragment implements View.OnClic
     private void init() {
         RecyclerView recyclerViewTopOffer = rootView.findViewById(R.id.recyclerViewTopOffer);
         categoryAdapter = new ProductCategoryAdapter(productCategoryLists, mContext, this, 1);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 3);
+        GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 4);
         recyclerViewTopOffer.setLayoutManager(gridLayoutManager);
         recyclerViewTopOffer.setItemAnimator(new DefaultItemAnimator());
         recyclerViewTopOffer.setAdapter(categoryAdapter);

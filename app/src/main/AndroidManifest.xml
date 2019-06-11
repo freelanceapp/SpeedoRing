@@ -34,7 +34,6 @@
             android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -57,17 +56,16 @@
         <activity android:name=".utils.multi_image_picker.CustomGalleryActivity">
             <intent-filter>
                 <action android:name="speedoring.ACTION_MULTIPLE_PICK" />
-
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
             android:name=".ui.vendor.activity.VendorAddListingActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.MainActivity">
-            <!--<intent-filter>
+        <activity android:name=".ui.MainActivity"/>
+        <activity android:name=".ui.InstaMojoActivity">
+           <!-- <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>-->
         </activity>
@@ -75,6 +73,22 @@
         <meta-data
             android:name="io.fabric.ApiKey"
             android:value="4f92de69364db81c0b98762d88b4025811aba6e8" />
+        <meta-data
+            android:name="instamojo.orderauth.url"
+            android:value="http://brotherforlife.in/speedoring/api/access_token.php" />
     </application>
+
+   <!-- <uses-permission-sdk-23 android:name="android.permission.RECEIVE_SMS" />
+
+    <uses-permission-sdk-23 android:name="android.permission.READ_SMS" />
+
+    <uses-permission-sdk-23 android:name="android.permission.READ_PHONE_STATE" />
+
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+
+    <uses-permission android:name="android.permission.READ_SMS" />
+
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+-->
 
 </manifest>

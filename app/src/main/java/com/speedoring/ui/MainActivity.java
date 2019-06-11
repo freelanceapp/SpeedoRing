@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.instamojo.android.Instamojo;
 import com.instamojo.android.activities.PaymentDetailsActivity;
@@ -37,6 +38,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
+import instamojo.library.InstapayListener;
 import okhttp3.OkHttpClient;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
@@ -65,6 +67,22 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         setContentView(R.layout.activity_main);
 
         init();
+    }
+
+    private void initListener() {
+        InstapayListener listener = new InstapayListener() {
+            @Override
+            public void onSuccess(String response) {
+                Toast.makeText(getApplicationContext(), response, Toast.LENGTH_LONG)
+                        .show();
+            }
+
+            @Override
+            public void onFailure(int code, String reason) {
+                Toast.makeText(getApplicationContext(), "Failed: " + reason, Toast.LENGTH_LONG)
+                        .show();
+            }
+        };
     }
 
     private static OkHttpClient httpClient = new OkHttpClient.Builder()

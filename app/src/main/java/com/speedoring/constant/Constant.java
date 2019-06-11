@@ -20,6 +20,7 @@ public class Constant {
     /*VENDOR*/
     public static final String VENDOR_LOGIN = "vendor-login.php";
     public static final String VENDOR_SIGN_UP = "vendor-signup.php";
+    public static final String FORGOT_PASSWORD = "vendor-reset-password.php";
     public static final String OTP_VERIFY = "vendor-submit-otp.php";
     public static final String PROFILE_DATA = "vendor-profile.php";
     public static final String UPLOAD_PROFILE_IMAGE = "vendor-profile-image-update.php";

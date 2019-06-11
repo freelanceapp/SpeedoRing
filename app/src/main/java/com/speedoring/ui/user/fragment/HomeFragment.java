@@ -125,14 +125,14 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
         RecyclerView recyclerViewTopOffer = rootView.findViewById(R.id.recyclerViewTopOffer);
         homeProductListAdapter = new HomeProductListAdapter(homeProductListings, mContext, this);
-        recyclerViewTopOffer.setLayoutManager(new GridLayoutManager(mContext, 2));
+        recyclerViewTopOffer.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerViewTopOffer.setItemAnimator(new DefaultItemAnimator());
         recyclerViewTopOffer.setAdapter(homeProductListAdapter);
         homeProductListAdapter.notifyDataSetChanged();
 
         RecyclerView rvProductCategory = rootView.findViewById(R.id.rvProductCategory);
         categoryAdapter = new ProductCategoryAdapter(productCategoryLists, mContext, this, 2);
-        rvProductCategory.setLayoutManager(new GridLayoutManager(mContext, 3));
+        rvProductCategory.setLayoutManager(new GridLayoutManager(mContext, 4));
         rvProductCategory.setItemAnimator(new DefaultItemAnimator());
         rvProductCategory.setAdapter(categoryAdapter);
         categoryAdapter.notifyDataSetChanged();
@@ -218,9 +218,9 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 @Override
                 public void onResponseSuccess(Response<?> result) {
                     HomeProductListMainModal mainModal = (HomeProductListMainModal) result.body();
+                    homeProductListings.clear();
                     if (mainModal == null)
                         return;
-
                     homeProductListings.addAll(mainModal.getProductListing());
                     homeProductListAdapter.notifyDataSetChanged();
                 }

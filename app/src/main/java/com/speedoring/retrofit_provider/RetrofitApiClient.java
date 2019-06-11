@@ -84,6 +84,10 @@ public interface RetrofitApiClient {
     @POST(Constant.OTP_VERIFY)
     Call<ResponseBody> otpVerification(@Field("mobile_no") String mobile_no, @Field("otp_no") String otp_no);
 
+    @FormUrlEncoded
+    @POST(Constant.FORGOT_PASSWORD)
+    Call<ResponseBody> forgotPassword(@Field("mobile_no") String mobile_no);
+
     @Multipart
     @POST(Constant.UPLOAD_PROFILE_IMAGE)
     Call<ResponseBody> uploadProfile(@Part("user_id") RequestBody userid, @Part MultipartBody.Part image);

@@ -5,7 +5,6 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -14,6 +13,8 @@ import com.speedoring.R;
 import com.speedoring.modal.user.product_category.ProductCategoryList;
 
 import java.util.List;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategoryAdapter.MyViewHolder> {
 
@@ -57,8 +58,8 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
         if (viewType == 1) {
             return categoryLists.size();
         } else {
-            if (categoryLists.size() > 6) {
-                return 6;
+            if (categoryLists.size() > 8) {
+                return 8;
             } else {
                 return categoryLists.size();
             }
@@ -69,7 +70,7 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
 
         private LinearLayout cardView;
         private TextView txtProductCategory;
-        private ImageView imgProductCategory;
+        private CircleImageView imgProductCategory;
 
         public MyViewHolder(View view) {
             super(view);

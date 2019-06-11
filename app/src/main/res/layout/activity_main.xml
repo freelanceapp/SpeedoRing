@@ -19,7 +19,7 @@
             android:layout_marginBottom="10dp"
             android:spinnerMode="dialog" />
 
-        <android.support.v7.widget.AppCompatEditText
+        <EditText
             android:id="@+id/name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -28,7 +28,7 @@
             android:inputType="textPersonName"
             android:text="Speedo Ring" />
 
-        <android.support.v7.widget.AppCompatEditText
+        <EditText
             android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
             android:inputType="textEmailAddress"
             android:text="speedoring@gmail.com" />
 
-        <android.support.v7.widget.AppCompatEditText
+        <EditText
             android:id="@+id/phone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,16 +46,16 @@
             android:inputType="phone"
             android:text="8727948782" />
 
-        <android.support.v7.widget.AppCompatEditText
+        <EditText
             android:id="@+id/amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:layout_marginBottom="10dp"
             android:inputType="numberDecimal"
-            android:text="@string/example_amount" />
+            android:text="10" />
 
-        <android.support.v7.widget.AppCompatEditText
+        <EditText
             android:id="@+id/description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
