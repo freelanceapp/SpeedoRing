@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,7 +29,7 @@ public class VendorListingFragment extends BaseFragment implements View.OnClickL
     private String vendorId = User.getUser().getVendorId();
 
     private VendorListingPaginationAdapter adapter;
-    private GridLayoutManager gridLayoutManager;
+    private LinearLayoutManager gridLayoutManager;
     private static final int PAGE_START = 1;
     private int currentPage = PAGE_START;
     private static int TOTAL_PAGES;
@@ -51,7 +52,7 @@ public class VendorListingFragment extends BaseFragment implements View.OnClickL
         RecyclerView recyclerViewEnquiry = rootView.findViewById(R.id.recyclerViewEnquiry);
         adapter = new VendorListingPaginationAdapter(mContext, this);
         adapter.getProductList().clear();
-        gridLayoutManager = new GridLayoutManager(mContext, 2);
+        gridLayoutManager = new LinearLayoutManager(mContext);
         recyclerViewEnquiry.setLayoutManager(gridLayoutManager);
         recyclerViewEnquiry.setItemAnimator(new DefaultItemAnimator());
         recyclerViewEnquiry.setAdapter(adapter);

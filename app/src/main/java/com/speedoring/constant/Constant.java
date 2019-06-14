@@ -17,10 +17,12 @@ public class Constant {
     public static final String PRODUCT_LIST_HOME = "select-product-home.php";
     public static final String PRODUCT_LIST = "select-product.php";
     public static final String PRODUCT_DETAIL = "select-product-details.php";
+
     /*VENDOR*/
     public static final String VENDOR_LOGIN = "vendor-login.php";
     public static final String VENDOR_SIGN_UP = "vendor-signup.php";
     public static final String FORGOT_PASSWORD = "vendor-reset-password.php";
+    public static final String CHANGE_PASSWORD = "vendor-password-change.php";
     public static final String OTP_VERIFY = "vendor-submit-otp.php";
     public static final String PROFILE_DATA = "vendor-profile.php";
     public static final String UPLOAD_PROFILE_IMAGE = "vendor-profile-image-update.php";
@@ -43,6 +45,7 @@ public class Constant {
 
     /* Preference */
     public static final String IS_LOGIN = "IS_LOGIN";
+    public static final String IS_FORGOT_PASSWORD = "IS_FORGOT_PASSWORD";
     public static final String IS_ITEM_ADDED = "IS_ITEM_ADDED";
     public static final String IS_VENDOR_DATA_UPDATE = "IS_VENDOR_DATA_UPDATE";
     public static final String VENDOR_DATA = "VENDOR_DATA";

@@ -1,5 +1,6 @@
 package com.speedoring.ui.vendor.activity;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,9 +8,11 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.speedoring.R;
+import com.speedoring.constant.Constant;
 import com.speedoring.retrofit_provider.RetrofitService;
 import com.speedoring.retrofit_provider.WebResponse;
 import com.speedoring.utils.Alerts;
+import com.speedoring.utils.AppPreference;
 import com.speedoring.utils.BaseActivity;
 import com.speedoring.utils.pinview.Pinview;
 
@@ -70,15 +73,20 @@ public class OtpVerificationActivity extends BaseActivity implements View.OnClic
                         try {
                             JSONObject jsonObject = new JSONObject(responseBody.string());
                             if (!jsonObject.getBoolean("error")) {
-                                Alerts.show(mContext, jsonObject.getString("message"));
-                                Alerts.show(mContext, "Login to continue...");
-                                //otpTextView.showSuccess();
-                                Intent intent = new Intent(mContext, SignInActivity.class);
-                                startActivity(intent);
-                                finish();
+                                if (AppPreference.getBooleanPreference(mContext, Constant.IS_FORGOT_PASSWORD)) {
+                                    Intent returnIntent = new Intent();
+                                    //returnIntent.putExtra("result", result);
+                                    setResult(Activity.RESULT_OK, returnIntent);
+                                    finish();
+                                } else {
+                                    Alerts.show(mContext, jsonObject.getString("message"));
+                                    Alerts.show(mContext, "Login to continue...");
+                                    Intent intent = new Intent(mContext, SignInActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
                             } else {
                                 Alerts.show(mContext, jsonObject.getString("message"));
-                                //otpTextView.showError();
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

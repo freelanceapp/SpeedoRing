@@ -23,6 +23,7 @@ import com.speedoring.retrofit_provider.WebResponse;
 import com.speedoring.utils.Alerts;
 import com.speedoring.utils.BaseFragment;
 import com.speedoring.utils.ConnectionDetector;
+import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +33,8 @@ import retrofit2.Response;
 public class VendorHomeFragment extends BaseFragment implements View.OnClickListener {
 
     private View rootView;
-
+    private int successPos = 0;
+    private CirclePageIndicator indicator;
     private Handler imageHandler;
     private Runnable imageRunnable;
     private ViewPager pagerSuccess;
@@ -56,6 +58,7 @@ public class VendorHomeFragment extends BaseFragment implements View.OnClickList
     }
 
     private void initPager() {
+        indicator = rootView.findViewById(R.id.indicator);
         pagerSuccess = rootView.findViewById(R.id.pagerSuccess);
         bannerAdapter = new BannerPagerAdapter(mContext, successImagesList, this);
         imagesApi();
@@ -72,7 +75,7 @@ public class VendorHomeFragment extends BaseFragment implements View.OnClickList
     public void marriageSlide() {
         if (pagerSuccess == null)
             return;
-        int successPos = pagerSuccess.getCurrentItem();
+        successPos = pagerSuccess.getCurrentItem();
         successPos++;
         if (successPos != successImagesList.size()) {
             pagerSuccess.setCurrentItem(successPos);
@@ -106,6 +109,26 @@ public class VendorHomeFragment extends BaseFragment implements View.OnClickList
                     successImagesList.addAll(imagesModal.getData());
                     pagerSuccess.setAdapter(bannerAdapter);
                     bannerAdapter.notifyDataSetChanged();
+
+                    indicator.setViewPager(pagerSuccess);
+                    final float density = getResources().getDisplayMetrics().density;
+                    indicator.setRadius(5 * density);
+                    indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                        @Override
+                        public void onPageSelected(int position) {
+                            successPos = position;
+                        }
+
+                        @Override
+                        public void onPageScrolled(int pos, float arg1, int arg2) {
+
+                        }
+
+                        @Override
+                        public void onPageScrollStateChanged(int pos) {
+
+                        }
+                    });
                 }
 
                 @Override

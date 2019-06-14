@@ -11,6 +11,7 @@
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/expanding-view" />
             <option value="$PROJECT_DIR$/ucrop" />
+            <option value="$PROJECT_DIR$/view_pager_indicator" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

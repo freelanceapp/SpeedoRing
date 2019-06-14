@@ -88,6 +88,10 @@ public interface RetrofitApiClient {
     @POST(Constant.FORGOT_PASSWORD)
     Call<ResponseBody> forgotPassword(@Field("mobile_no") String mobile_no);
 
+    @FormUrlEncoded
+    @POST(Constant.CHANGE_PASSWORD)
+    Call<ResponseBody> changePassword(@Field("mobile_no") String mobile_no, @Field("password") String password);
+
     @Multipart
     @POST(Constant.UPLOAD_PROFILE_IMAGE)
     Call<ResponseBody> uploadProfile(@Part("user_id") RequestBody userid, @Part MultipartBody.Part image);

@@ -38,6 +38,7 @@ import com.speedoring.ui.user.activity.UserProductListActivity;
 import com.speedoring.utils.Alerts;
 import com.speedoring.utils.BaseFragment;
 import com.speedoring.utils.ConnectionDetector;
+import com.viewpagerindicator.CirclePageIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     private ViewMoreInterface viewMoreInterface;
 
+    private CirclePageIndicator indicator;
+    private int successPos = 0;
     private Handler imageHandler;
     private Runnable imageRunnable;
     private ViewPager pagerSuccess;
@@ -87,6 +90,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     private void initPager() {
         pagerSuccess = rootView.findViewById(R.id.pagerSuccess);
+        indicator = rootView.findViewById(R.id.indicator);
+
         adapter = new BannerPagerAdapter(mContext, successImagesList, this);
         imagesApi();
         imageHandler = new Handler();
@@ -97,12 +102,13 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             }
         };
         imageHandler.postDelayed(imageRunnable, 3000);
+
     }
 
     public void marriageSlide() {
         if (pagerSuccess == null)
             return;
-        int successPos = pagerSuccess.getCurrentItem();
+        successPos = pagerSuccess.getCurrentItem();
         successPos++;
         if (successPos != successImagesList.size()) {
             pagerSuccess.setCurrentItem(successPos);
@@ -153,6 +159,27 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                     successImagesList.addAll(imagesModal.getData());
                     pagerSuccess.setAdapter(adapter);
                     adapter.notifyDataSetChanged();
+
+                    indicator.setViewPager(pagerSuccess);
+                    final float density = getResources().getDisplayMetrics().density;
+                    indicator.setRadius(5 * density);
+                    indicator.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                        @Override
+                        public void onPageSelected(int position) {
+                            successPos = position;
+                        }
+
+                        @Override
+                        public void onPageScrolled(int pos, float arg1, int arg2) {
+
+                        }
+
+                        @Override
+                        public void onPageScrollStateChanged(int pos) {
+
+                        }
+                    });
+
                 }
 
                 @Override

@@ -35,6 +35,7 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
         findViewById(R.id.imgBack).setOnClickListener(this);
         findViewById(R.id.imgLogin).setOnClickListener(this);
         findViewById(R.id.txtSignUp).setOnClickListener(this);
+        findViewById(R.id.txtForgotPassword).setOnClickListener(this);
     }
 
     @Override
@@ -54,6 +55,9 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                 break;
             case R.id.txtSignUp:
                 startActivity(new Intent(mContext, SignUpActivity.class));
+                break;
+            case R.id.txtForgotPassword:
+                startActivity(new Intent(mContext, ForgotPasswordActivity.class));
                 break;
         }
     }
@@ -96,7 +100,7 @@ public class SignInActivity extends BaseActivity implements View.OnClickListener
                                 Intent intent = new Intent(mContext, OtpVerificationActivity.class);
                                 intent.putExtra("phone", strPhone);
                                 startActivity(intent);
-                            }else {
+                            } else {
                                 Alerts.show(findViewById(R.id.rlContainer), loginMainModal.getMessage());
                             }
                         }
