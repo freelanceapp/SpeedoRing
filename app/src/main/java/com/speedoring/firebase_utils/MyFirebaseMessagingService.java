@@ -3,8 +3,8 @@ package com.speedoring.firebase_utils;
 import android.content.Context;
 import android.util.Log;
 
-import com.google.firebase.messaging.FirebaseMessagingService;
-import com.google.firebase.messaging.RemoteMessage;
+/*import com.google.firebase.messaging.FirebaseMessagingService;
+import com.google.firebase.messaging.RemoteMessage;*/
 import com.speedoring.constant.Constant;
 import com.speedoring.retrofit_provider.RetrofitApiClient;
 import com.speedoring.retrofit_provider.RetrofitService;
@@ -14,7 +14,9 @@ import com.speedoring.utils.NotificationHelper;
 
 import org.json.JSONObject;
 
-public class MyFirebaseMessagingService extends FirebaseMessagingService {
+import static com.facebook.FacebookSdk.getApplicationContext;
+
+public class MyFirebaseMessagingService {
 
     private String TAG = "message_data";
 
@@ -23,7 +25,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     public Context mContext;
     private NotificationHelper notificationHelper;
 
-    @Override
+    /*@Override
     public void onNewToken(String s) {
 
         mContext = this;
@@ -36,7 +38,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         if (AppPreference.getBooleanPreference(getApplicationContext(), Constant.IS_LOGIN)) {
             // updateToken(s);
         }
-    }
+    }*/
 
 /*
     private void updateToken(String strToken) {
@@ -63,6 +65,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 */
 
+/*
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
         mContext = this;
@@ -102,4 +105,5 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             Log.e(TAG, "NotiBody: " + strPayload);
         }
     }
+*/
 }

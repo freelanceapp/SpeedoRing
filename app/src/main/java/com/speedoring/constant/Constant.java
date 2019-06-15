@@ -36,7 +36,7 @@ public class Constant {
 
     /* Fragment tag */
     public static final String HomeFragment = "HomeFragment";
-    public static final String UserAllCategoryFragment = "UserAllCategoryFragment";
+    public static final String UserAllCategoryFragment = "UserAllCategoryActivity";
     public static final String VendorHomeFragment = "VendorHomeFragment";
     public static final String VendorListingFragment = "VendorListingFragment";
     public static final String VendorMyEnquiryFragment = "VendorMyEnquiryFragment";

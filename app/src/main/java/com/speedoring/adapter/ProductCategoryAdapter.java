@@ -21,23 +21,23 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
     private List<ProductCategoryList> categoryLists;
     private Context context;
     private View.OnClickListener onClickListener;
-    private int viewType;
+    private int vwType;
 
     public ProductCategoryAdapter(List<ProductCategoryList> categoryLists, Context context, View.OnClickListener onClickListener, int viewType) {
         this.categoryLists = categoryLists;
         this.context = context;
         this.onClickListener = onClickListener;
-        this.viewType = viewType;
+        this.vwType = viewType;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_row_product_category_b, parent, false);
-        /*if (viewType == 1) {
+        View itemView;
+        if (vwType == 1) {
             itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_row_product_category, parent, false);
         } else {
             itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_row_product_category_b, parent, false);
-        }*/
+        }
         return new MyViewHolder(itemView);
     }
 
@@ -55,7 +55,7 @@ public class ProductCategoryAdapter extends RecyclerView.Adapter<ProductCategory
 
     @Override
     public int getItemCount() {
-        if (viewType == 1) {
+        if (vwType == 1 || vwType == 2) {
             return categoryLists.size();
         } else {
             if (categoryLists.size() > 8) {

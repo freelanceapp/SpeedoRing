@@ -20,16 +20,24 @@ public class ServiceCategoryAdapter extends RecyclerView.Adapter<ServiceCategory
     private List<ServicesCategory> servicesCategoryList;
     private Context context;
     private View.OnClickListener onClickListener;
+    private int vwType;
 
-    public ServiceCategoryAdapter(List<ServicesCategory> servicesCategoryList, Context context, View.OnClickListener onClickListener) {
+    public ServiceCategoryAdapter(List<ServicesCategory> servicesCategoryList, Context context,
+                                  View.OnClickListener onClickListener, int viewType) {
         this.servicesCategoryList = servicesCategoryList;
         this.context = context;
         this.onClickListener = onClickListener;
+        this.vwType = viewType;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_row_service_category, parent, false);
+        View itemView;
+        if (vwType == 1) {
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_row_service_category, parent, false);
+        } else {
+            itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_row_service_category_b, parent, false);
+        }
         return new MyViewHolder(itemView);
     }
 

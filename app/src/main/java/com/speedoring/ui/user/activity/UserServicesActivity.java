@@ -3,7 +3,7 @@ package com.speedoring.ui.user.activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.TextView;
@@ -44,8 +44,7 @@ public class UserServicesActivity extends BaseActivity implements View.OnClickLi
 
         RecyclerView recyclerViewServices = findViewById(R.id.recyclerViewServices);
         serviceListAdapter = new ServiceListAdapter(serviceLists, mContext, this);
-        GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2);
-        recyclerViewServices.setLayoutManager(gridLayoutManager);
+        recyclerViewServices.setLayoutManager(new LinearLayoutManager(mContext));
         recyclerViewServices.setItemAnimator(new DefaultItemAnimator());
         recyclerViewServices.setAdapter(serviceListAdapter);
         serviceListAdapter.notifyDataSetChanged();

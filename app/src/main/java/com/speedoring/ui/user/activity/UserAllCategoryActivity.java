@@ -1,4 +1,4 @@
-package com.speedoring.ui.user.fragment;
+package com.speedoring.ui.user.activity;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -7,9 +7,7 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.RelativeLayout;
 
@@ -22,19 +20,16 @@ import com.speedoring.modal.user.product_sub_category.ProductSubCategory;
 import com.speedoring.modal.user.product_sub_category.ProductSubCategoryMainModal;
 import com.speedoring.retrofit_provider.RetrofitService;
 import com.speedoring.retrofit_provider.WebResponse;
-import com.speedoring.ui.user.activity.UserProductListActivity;
 import com.speedoring.utils.Alerts;
-import com.speedoring.utils.BaseFragment;
-import com.speedoring.utils.ConnectionDetector;
+import com.speedoring.utils.BaseActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import retrofit2.Response;
 
-public class UserAllCategoryFragment extends BaseFragment implements View.OnClickListener {
+public class UserAllCategoryActivity extends BaseActivity implements View.OnClickListener {
 
-    private View rootView;
     private Dialog dialogSubCategory;
     private String categoryId = "", categoryName = "";
 
@@ -45,20 +40,17 @@ public class UserAllCategoryFragment extends BaseFragment implements View.OnClic
     private List<ProductSubCategory> subCategoryLists = new ArrayList<>();
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        rootView = inflater.inflate(R.layout.user_fragment_all_category, container, false);
-        mContext = getActivity();
-        retrofitApiClient = RetrofitService.getRetrofit();
-        cd = new ConnectionDetector(mContext);
+        setContentView(R.layout.user_activity_all_category);
         init();
-        return rootView;
     }
 
     private void init() {
-        RecyclerView recyclerViewTopOffer = rootView.findViewById(R.id.recyclerViewTopOffer);
-        categoryAdapter = new ProductCategoryAdapter(productCategoryLists, mContext, this, 1);
+        findViewById(R.id.imgBack).setOnClickListener(this);
+
+        RecyclerView recyclerViewTopOffer = findViewById(R.id.recyclerViewTopOffer);
+        categoryAdapter = new ProductCategoryAdapter(productCategoryLists, mContext, this, 2);
         GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 4);
         recyclerViewTopOffer.setLayoutManager(gridLayoutManager);
         recyclerViewTopOffer.setItemAnimator(new DefaultItemAnimator());
@@ -94,6 +86,9 @@ public class UserAllCategoryFragment extends BaseFragment implements View.OnClic
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
+            case R.id.imgBack:
+                finish();
+                break;
             case R.id.cardViewPopular:
                 int pos = Integer.parseInt(v.getTag().toString());
                 categoryId = productCategoryLists.get(pos).getCategoryId();

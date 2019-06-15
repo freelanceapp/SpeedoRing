@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.speedoring.R;
 import com.speedoring.adapter.BannerPagerAdapter;
@@ -21,7 +22,7 @@ import com.speedoring.adapter.HomeProductListAdapter;
 import com.speedoring.adapter.ProductCategoryAdapter;
 import com.speedoring.adapter.ProductSubCategoryAdapter;
 import com.speedoring.adapter.ServiceCategoryAdapter;
-import com.speedoring.interface_update_data.ViewMoreInterface;
+import com.speedoring.interface_update_data.CategoryServiceInterface;
 import com.speedoring.modal.banner_model.BannerDatum;
 import com.speedoring.modal.banner_model.BannerModel;
 import com.speedoring.modal.user.product_category.ProductCategoryList;
@@ -34,6 +35,7 @@ import com.speedoring.modal.user.service_category.ServiceCategoryMainModal;
 import com.speedoring.modal.user.service_category.ServicesCategory;
 import com.speedoring.retrofit_provider.RetrofitService;
 import com.speedoring.retrofit_provider.WebResponse;
+import com.speedoring.ui.user.activity.UserAllCategoryActivity;
 import com.speedoring.ui.user.activity.UserProductListActivity;
 import com.speedoring.utils.Alerts;
 import com.speedoring.utils.BaseFragment;
@@ -48,12 +50,12 @@ import retrofit2.Response;
 public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     private View rootView;
-    private String categoryId = "", categoryName = "";
-    private ProductSubCategoryAdapter subCategoryAdapter;
-    private List<ProductSubCategory> subCategoryLists = new ArrayList<>();
-    private Dialog dialogSubCategory;
+    private Dialog dialogCall, dialogAddress;
 
-    private ViewMoreInterface viewMoreInterface;
+    private String categoryId = "", categoryName = "";
+    private List<ProductSubCategory> subCategoryLists = new ArrayList<>();
+    private ProductSubCategoryAdapter subCategoryAdapter;
+    private Dialog dialogSubCategory;
 
     private CirclePageIndicator indicator;
     private int successPos = 0;
@@ -62,14 +64,16 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     private ViewPager pagerSuccess;
     private BannerPagerAdapter adapter;
     private List<BannerDatum> successImagesList = new ArrayList<>();
-    private ServiceCategoryAdapter serviceCategoryAdapter;
-    private List<ServicesCategory> servicesCategoryList = new ArrayList<>();
 
     private HomeProductListAdapter homeProductListAdapter;
     private List<HomeProductListing> homeProductListings = new ArrayList<>();
 
+    private ServiceCategoryAdapter serviceCategoryAdapter;
+    private List<ServicesCategory> servicesCategoryList = new ArrayList<>();
     private ProductCategoryAdapter categoryAdapter;
     private List<ProductCategoryList> productCategoryLists = new ArrayList<>();
+
+    private CategoryServiceInterface anInterface;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -84,8 +88,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         return rootView;
     }
 
-    public void clickedInterface(ViewMoreInterface viewMoreInterface) {
-        this.viewMoreInterface = viewMoreInterface;
+    public void initInterface(CategoryServiceInterface anInterface) {
+        this.anInterface = anInterface;
     }
 
     private void initPager() {
@@ -102,7 +106,6 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
             }
         };
         imageHandler.postDelayed(imageRunnable, 3000);
-
     }
 
     public void marriageSlide() {
@@ -123,7 +126,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         rootView.findViewById(R.id.txtViewMore).setOnClickListener(this);
 
         RecyclerView rvPopularVendor = rootView.findViewById(R.id.rvPopularVendor);
-        serviceCategoryAdapter = new ServiceCategoryAdapter(servicesCategoryList, mContext, this);
+        serviceCategoryAdapter = new ServiceCategoryAdapter(servicesCategoryList, mContext, this, 1);
         rvPopularVendor.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.HORIZONTAL, false));
         rvPopularVendor.setItemAnimator(new DefaultItemAnimator());
         rvPopularVendor.setAdapter(serviceCategoryAdapter);
@@ -137,12 +140,11 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         homeProductListAdapter.notifyDataSetChanged();
 
         RecyclerView rvProductCategory = rootView.findViewById(R.id.rvProductCategory);
-        categoryAdapter = new ProductCategoryAdapter(productCategoryLists, mContext, this, 2);
+        categoryAdapter = new ProductCategoryAdapter(productCategoryLists, mContext, this, 3);
         rvProductCategory.setLayoutManager(new GridLayoutManager(mContext, 4));
         rvProductCategory.setItemAnimator(new DefaultItemAnimator());
         rvProductCategory.setAdapter(categoryAdapter);
         categoryAdapter.notifyDataSetChanged();
-        servicesCategoryApi();
         getHomeProductApi();
         productCategoryApi();
     }
@@ -202,6 +204,8 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
                     productCategoryLists.addAll(mainModal.getCategory());
                     categoryAdapter.notifyDataSetChanged();
+
+                    servicesCategoryApi();
                 }
 
                 @Override
@@ -226,6 +230,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                         servicesCategoryList.addAll(storeMainModel.getServicesCategory());
                     }
                     serviceCategoryAdapter.notifyDataSetChanged();
+                    anInterface.getCategoryList(servicesCategoryList, productCategoryLists);
                 }
 
                 @Override
@@ -266,7 +271,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.txtViewMore:
-                viewMoreInterface.isClicked(true);
+                startActivity(new Intent(mContext, UserAllCategoryActivity.class));
                 break;
             case R.id.cardViewPopular:
                 int pos = Integer.parseInt(v.getTag().toString());
@@ -284,6 +289,23 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 intent.putExtra("category_name", categoryName);
                 dialogSubCategory.dismiss();
                 startActivity(intent);
+                break;
+
+            case R.id.imgCall:
+                int posC = (int) v.getTag();
+                String mobileA = homeProductListings.get(posC).getVendorMobileOne();
+                String mobileB = homeProductListings.get(posC).getVendorMobileTwo();
+                String LandlineA = homeProductListings.get(posC).getVendorMobileOne();
+                String LandlineB = homeProductListings.get(posC).getVendorMobileTwo();
+                String email = homeProductListings.get(posC).getVendorEmail();
+                callDialog(mobileA, mobileB, LandlineA, LandlineB, email);
+                break;
+            case R.id.imgAddress:
+                int posA = (int) v.getTag();
+                String state = homeProductListings.get(posA).getVendorState();
+                String city = homeProductListings.get(posA).getVendorCity();
+                String address = homeProductListings.get(posA).getVendorAddress();
+                addressDialog(state, city, address);
                 break;
         }
     }
@@ -348,4 +370,58 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         dialogSubCategory.show();
     }
 
+    private void callDialog(String mobileA, String mobileB, String LandlineA,
+                            String LandlineB, String email) {
+        dialogCall = new Dialog(mContext);
+        dialogCall.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogCall.setContentView(R.layout.dialog_call);
+
+        dialogCall.setCanceledOnTouchOutside(true);
+        dialogCall.setCancelable(true);
+        if (dialogCall.getWindow() != null)
+            dialogCall.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        ((TextView) dialogCall.findViewById(R.id.txtMobileA)).setText(mobileA);
+        ((TextView) dialogCall.findViewById(R.id.txtMobileB)).setText(mobileB);
+        ((TextView) dialogCall.findViewById(R.id.txtLandlineA)).setText(LandlineA);
+        ((TextView) dialogCall.findViewById(R.id.txtLandlineB)).setText(LandlineB);
+        ((TextView) dialogCall.findViewById(R.id.txtEmailAddress)).setText(email);
+
+        dialogCall.findViewById(R.id.btnOk).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogCall.dismiss();
+            }
+        });
+
+        Window window = dialogCall.getWindow();
+        window.setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+        dialogCall.show();
+    }
+
+    private void addressDialog(String state, String city, String address) {
+        dialogAddress = new Dialog(mContext);
+        dialogAddress.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogAddress.setContentView(R.layout.dialog_address);
+
+        dialogAddress.setCanceledOnTouchOutside(true);
+        dialogAddress.setCancelable(true);
+        if (dialogAddress.getWindow() != null)
+            dialogAddress.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        ((TextView) dialogAddress.findViewById(R.id.txtState)).setText(state);
+        ((TextView) dialogAddress.findViewById(R.id.txtCity)).setText(city);
+        ((TextView) dialogAddress.findViewById(R.id.txtAddress)).setText(address);
+
+        dialogAddress.findViewById(R.id.btnOk).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogAddress.dismiss();
+            }
+        });
+
+        Window window = dialogAddress.getWindow();
+        window.setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+        dialogAddress.show();
+    }
 }

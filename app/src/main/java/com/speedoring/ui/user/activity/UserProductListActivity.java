@@ -6,6 +6,8 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
+import android.view.Window;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.speedoring.R;
@@ -30,6 +32,8 @@ public class UserProductListActivity extends BaseActivity implements View.OnClic
     private static int TOTAL_PAGES;
     private boolean isLoading = false;
     private boolean isLastPage = false;
+
+    private Dialog dialogCall, dialogAddress;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -151,6 +155,78 @@ public class UserProductListActivity extends BaseActivity implements View.OnClic
             case R.id.imgBack:
                 finish();
                 break;
+            case R.id.imgCall:
+                int pos = (int) v.getTag();
+                String mobileA = adapter.getProductList().get(pos).getVendorMobileOne();
+                String mobileB = adapter.getProductList().get(pos).getVendorMobileTwo();
+                String LandlineA = adapter.getProductList().get(pos).getVendorMobileOne();
+                String LandlineB = adapter.getProductList().get(pos).getVendorMobileTwo();
+                String email = adapter.getProductList().get(pos).getVendorEmail();
+                callDialog(mobileA, mobileB, LandlineA, LandlineB, email);
+                break;
+            case R.id.imgAddress:
+                int posA = (int) v.getTag();
+                String state = adapter.getProductList().get(posA).getVendorState();
+                String city = adapter.getProductList().get(posA).getVendorCity();
+                String address = adapter.getProductList().get(posA).getVendorAddress();
+                addressDialog(state, city, address);
+                break;
         }
     }
+
+    private void callDialog(String mobileA, String mobileB, String LandlineA,
+                            String LandlineB, String email) {
+        dialogCall = new Dialog(mContext);
+        dialogCall.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogCall.setContentView(R.layout.dialog_call);
+
+        dialogCall.setCanceledOnTouchOutside(true);
+        dialogCall.setCancelable(true);
+        if (dialogCall.getWindow() != null)
+            dialogCall.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        ((TextView) dialogCall.findViewById(R.id.txtMobileA)).setText(mobileA);
+        ((TextView) dialogCall.findViewById(R.id.txtMobileB)).setText(mobileB);
+        ((TextView) dialogCall.findViewById(R.id.txtLandlineA)).setText(LandlineA);
+        ((TextView) dialogCall.findViewById(R.id.txtLandlineB)).setText(LandlineB);
+        ((TextView) dialogCall.findViewById(R.id.txtEmailAddress)).setText(email);
+
+        dialogCall.findViewById(R.id.btnOk).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogCall.dismiss();
+            }
+        });
+
+        Window window = dialogCall.getWindow();
+        window.setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+        dialogCall.show();
+    }
+
+    private void addressDialog(String state, String city, String address) {
+        dialogAddress = new Dialog(mContext);
+        dialogAddress.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialogAddress.setContentView(R.layout.dialog_address);
+
+        dialogAddress.setCanceledOnTouchOutside(true);
+        dialogAddress.setCancelable(true);
+        if (dialogAddress.getWindow() != null)
+            dialogAddress.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+        ((TextView) dialogAddress.findViewById(R.id.txtState)).setText(state);
+        ((TextView) dialogAddress.findViewById(R.id.txtCity)).setText(city);
+        ((TextView) dialogAddress.findViewById(R.id.txtAddress)).setText(address);
+
+        dialogAddress.findViewById(R.id.btnOk).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialogAddress.dismiss();
+            }
+        });
+
+        Window window = dialogAddress.getWindow();
+        window.setLayout(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT);
+        dialogAddress.show();
+    }
+
 }

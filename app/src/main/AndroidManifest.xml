@@ -38,7 +38,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.vendor.activity.SignInActivity" />
-        <activity android:name=".ui.user.activity.UserHomeActivity" />
+        <activity
+            android:name=".ui.user.activity.UserHomeActivity"
+            android:label="" />
         <activity android:name=".ui.vendor.activity.SignUpActivity" />
         <activity android:name=".ui.user.activity.UserServicesActivity" />
         <activity android:name=".ui.user.activity.UserServiceDetailActivity" />
@@ -62,14 +64,16 @@
         <activity
             android:name=".ui.vendor.activity.VendorAddListingActivity"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".ui.MainActivity"/>
+        <activity android:name=".ui.MainActivity" />
         <activity android:name=".ui.InstaMojoActivity">
-           <!-- <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>-->
+            <!-- <intent-filter>
+                 <action android:name="android.intent.action.MAIN" />
+                 <category android:name="android.intent.category.LAUNCHER" />
+             </intent-filter>-->
         </activity>
         <activity android:name=".ui.vendor.activity.ForgotPasswordActivity" />
+        <activity android:name=".ui.user.activity.UserAllCategoryActivity" />
+        <activity android:name=".ui.user.activity.SearchActivity" />
 
         <meta-data
             android:name="io.fabric.ApiKey"
@@ -79,17 +83,17 @@
             android:value="http://brotherforlife.in/speedoring/api/access_token.php" />
     </application>
 
-   <!-- <uses-permission-sdk-23 android:name="android.permission.RECEIVE_SMS" />
+    <!-- <uses-permission-sdk-23 android:name="android.permission.RECEIVE_SMS" />
 
-    <uses-permission-sdk-23 android:name="android.permission.READ_SMS" />
+     <uses-permission-sdk-23 android:name="android.permission.READ_SMS" />
 
-    <uses-permission-sdk-23 android:name="android.permission.READ_PHONE_STATE" />
+     <uses-permission-sdk-23 android:name="android.permission.READ_PHONE_STATE" />
 
-    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+     <uses-permission android:name="android.permission.RECEIVE_SMS" />
 
-    <uses-permission android:name="android.permission.READ_SMS" />
+     <uses-permission android:name="android.permission.READ_SMS" />
 
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
--->
+     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+ -->
 
 </manifest>

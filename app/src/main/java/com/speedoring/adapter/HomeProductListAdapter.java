@@ -40,6 +40,12 @@ public class HomeProductListAdapter extends RecyclerView.Adapter<HomeProductList
         holder.txtProductTitle.setText(reviewModelList.get(position).getListingName());
         holder.txtProductDes.setText(reviewModelList.get(position).getDescription());
 
+        holder.imgCall.setTag(position);
+        holder.imgCall.setOnClickListener(onClickListener);
+
+        holder.imgAddress.setTag(position);
+        holder.imgAddress.setOnClickListener(onClickListener);
+
         holder.llTop.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -62,12 +68,14 @@ public class HomeProductListAdapter extends RecyclerView.Adapter<HomeProductList
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public ImageView imgProduct;
+        public ImageView imgProduct,imgCall, imgAddress;
         private TextView txtProductTitle, txtProductDes;
         private LinearLayout llTop;
 
         public MyViewHolder(View view) {
             super(view);
+            imgCall = view.findViewById(R.id.imgCall);
+            imgAddress = view.findViewById(R.id.imgAddress);
             llTop = view.findViewById(R.id.llTop);
             imgProduct = view.findViewById(R.id.imgProduct);
             txtProductTitle = view.findViewById(R.id.txtProductTitle);

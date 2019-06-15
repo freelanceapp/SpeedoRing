@@ -66,6 +66,12 @@ public class ProductListPaginationAdapter extends RecyclerView.Adapter<RecyclerV
                 viewHolder.txtProductTitle.setText(productListings.get(position).getListingName());
                 viewHolder.txtProductDes.setText(productListings.get(position).getDescription());
 
+                viewHolder.imgCall.setTag(position);
+                viewHolder.imgCall.setOnClickListener(onClickListener);
+
+                viewHolder.imgAddress.setTag(position);
+                viewHolder.imgAddress.setOnClickListener(onClickListener);
+
                 viewHolder.llTop.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -73,7 +79,6 @@ public class ProductListPaginationAdapter extends RecyclerView.Adapter<RecyclerV
                         intent.putExtra("product_id", productListings.get(position).getListingId());
                         intent.putExtra("from", "user");
                         context.startActivity(intent);
-                        //Alerts.show(context, "Under development...!!!");
                     }
                 });
 
@@ -117,12 +122,14 @@ public class ProductListPaginationAdapter extends RecyclerView.Adapter<RecyclerV
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public ImageView imgProduct;
+        public ImageView imgProduct, imgCall, imgAddress;
         private TextView txtProductTitle, txtProductDes;
         private LinearLayout llTop;
 
         public MyViewHolder(View view) {
             super(view);
+            imgCall = view.findViewById(R.id.imgCall);
+            imgAddress = view.findViewById(R.id.imgAddress);
             llTop = view.findViewById(R.id.llTop);
             imgProduct = view.findViewById(R.id.imgProduct);
             txtProductTitle = view.findViewById(R.id.txtProductTitle);

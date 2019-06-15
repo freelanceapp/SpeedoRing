@@ -47,7 +47,6 @@ public class VendorHomeActivity extends BaseActivity implements View.OnClickList
 
     private View contentView;
     private DrawerLayout drawerLayout;
-    public static Toolbar toolbar;
 
     private TextView txtTitle;
     public static FragmentUtils fragmentUtils;
@@ -58,8 +57,6 @@ public class VendorHomeActivity extends BaseActivity implements View.OnClickList
     private ExpandingList mExpandingList;
 
     /******************************/
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -89,7 +86,7 @@ public class VendorHomeActivity extends BaseActivity implements View.OnClickList
         findViewById(R.id.txtAboutUs).setOnClickListener(this);
         findViewById(R.id.txtLogout).setOnClickListener(this);
 
-        toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         drawerLayout = findViewById(R.id.drawer_layout);
         contentView = findViewById(R.id.container);
