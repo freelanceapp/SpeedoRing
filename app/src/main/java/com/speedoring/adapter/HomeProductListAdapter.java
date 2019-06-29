@@ -38,7 +38,21 @@ public class HomeProductListAdapter extends RecyclerView.Adapter<HomeProductList
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         holder.txtProductTitle.setText(reviewModelList.get(position).getListingName());
-        holder.txtProductDes.setText(reviewModelList.get(position).getDescription());
+
+        String contact = reviewModelList.get(position).getCendorMobileNumber();
+        if (!reviewModelList.get(position).getCendorMobileNumber().isEmpty()) {
+            contact = reviewModelList.get(position).getCendorMobileNumber();
+        } else if (!reviewModelList.get(position).getVendorMobileOne().isEmpty()) {
+            contact = reviewModelList.get(position).getCendorMobileNumber();
+        } else if (!reviewModelList.get(position).getVendorMobileTwo().isEmpty()) {
+            contact = reviewModelList.get(position).getCendorMobileNumber();
+        } else if (!reviewModelList.get(position).getVendorLandlineOne().isEmpty()) {
+            contact = reviewModelList.get(position).getCendorMobileNumber();
+        } else if (!reviewModelList.get(position).getVendorLandlineTwo().isEmpty()) {
+            contact = reviewModelList.get(position).getCendorMobileNumber();
+        }
+
+        holder.txtProductDes.setText(contact);
 
         holder.imgCall.setTag(position);
         holder.imgCall.setOnClickListener(onClickListener);
@@ -68,7 +82,7 @@ public class HomeProductListAdapter extends RecyclerView.Adapter<HomeProductList
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-        public ImageView imgProduct,imgCall, imgAddress;
+        public ImageView imgProduct, imgCall, imgAddress;
         private TextView txtProductTitle, txtProductDes;
         private LinearLayout llTop;
 

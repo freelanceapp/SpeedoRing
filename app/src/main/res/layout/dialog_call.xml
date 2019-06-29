@@ -41,7 +41,7 @@
                 <TextView
                     android:id="@+id/txtMobileA"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
+                    android:layout_height="40dp"
                     android:gravity="center_vertical"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
@@ -50,7 +50,16 @@
                 <TextView
                     android:id="@+id/txtMobileB"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
+                    android:layout_height="40dp"
+                    android:gravity="center_vertical"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:textColor="@color/text_color_a" />
+
+                <TextView
+                    android:id="@+id/txtMobileC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
                     android:gravity="center_vertical"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
@@ -81,7 +90,7 @@
                 <TextView
                     android:id="@+id/txtLandlineA"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
+                    android:layout_height="40dp"
                     android:gravity="center_vertical"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"
@@ -90,7 +99,7 @@
                 <TextView
                     android:id="@+id/txtLandlineB"
                     android:layout_width="wrap_content"
-                    android:layout_height="45dp"
+                    android:layout_height="40dp"
                     android:gravity="center_vertical"
                     android:paddingStart="16dp"
                     android:paddingEnd="16dp"

@@ -14,15 +14,15 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.speedoring.R;
-import com.speedoring.modal.user.product_list_home.HomeProductListing;
+import com.speedoring.modal.search_modal.SearchProductListing;
 import com.speedoring.ui.user.activity.UserProductDetailActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProductListPaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class SearchProductListPaginationAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    private List<HomeProductListing> productListings;
+    private List<SearchProductListing> productListings;
     private Context context;
     private View.OnClickListener onClickListener;
     private static final int ITEM = 0;
@@ -31,13 +31,13 @@ public class ProductListPaginationAdapter extends RecyclerView.Adapter<RecyclerV
     private boolean retryPageLoad = false;
     private String errorMsg;
 
-    public ProductListPaginationAdapter(Context context, View.OnClickListener onClickListener) {
+    public SearchProductListPaginationAdapter(Context context, View.OnClickListener onClickListener) {
         productListings = new ArrayList<>();
         this.context = context;
         this.onClickListener = onClickListener;
     }
 
-    public List<HomeProductListing> getProductList() {
+    public List<SearchProductListing> getProductList() {
         return productListings;
     }
 
@@ -185,27 +185,27 @@ public class ProductListPaginationAdapter extends RecyclerView.Adapter<RecyclerV
     }
 
     /*Helper pagination*/
-    public void add(HomeProductListing r) {
+    public void add(SearchProductListing r) {
         productListings.add(r);
         notifyItemInserted(productListings.size() - 1);
     }
 
-    public void addAll(List<HomeProductListing> moveResults) {
-        for (HomeProductListing result : moveResults) {
+    public void addAll(List<SearchProductListing> moveResults) {
+        for (SearchProductListing result : moveResults) {
             add(result);
         }
     }
 
     public void addLoadingFooter() {
         isLoadingAdded = true;
-        add(new HomeProductListing());
+        add(new SearchProductListing());
     }
 
     public void removeLoadingFooter() {
         isLoadingAdded = false;
 
         int position = productListings.size() - 1;
-        HomeProductListing result = getItem(position);
+        SearchProductListing result = getItem(position);
 
         if (result != null) {
             productListings.remove(position);
@@ -213,7 +213,7 @@ public class ProductListPaginationAdapter extends RecyclerView.Adapter<RecyclerV
         }
     }
 
-    public HomeProductListing getItem(int position) {
+    public SearchProductListing getItem(int position) {
         return productListings.get(position);
     }
 

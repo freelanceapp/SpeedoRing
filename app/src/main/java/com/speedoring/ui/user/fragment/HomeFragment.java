@@ -1,9 +1,15 @@
 package com.speedoring.ui.user.fragment;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
@@ -49,6 +55,7 @@ import retrofit2.Response;
 
 public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
+    private static final int REQUEST_PHONE_CALL = 789;
     private View rootView;
     private Dialog dialogCall, dialogAddress;
 
@@ -67,6 +74,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
     private HomeProductListAdapter homeProductListAdapter;
     private List<HomeProductListing> homeProductListings = new ArrayList<>();
+    private int posC;
 
     private ServiceCategoryAdapter serviceCategoryAdapter;
     private List<ServicesCategory> servicesCategoryList = new ArrayList<>();
@@ -81,6 +89,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
         rootView = inflater.inflate(R.layout.user_fragment_home, container, false);
         mContext = getActivity();
+        activity = getActivity();
         retrofitApiClient = RetrofitService.getRetrofit();
         cd = new ConnectionDetector(mContext);
         initPager();
@@ -292,13 +301,19 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 break;
 
             case R.id.imgCall:
-                int posC = (int) v.getTag();
+                posC = (int) v.getTag();
                 String mobileA = homeProductListings.get(posC).getVendorMobileOne();
                 String mobileB = homeProductListings.get(posC).getVendorMobileTwo();
-                String LandlineA = homeProductListings.get(posC).getVendorMobileOne();
-                String LandlineB = homeProductListings.get(posC).getVendorMobileTwo();
+                String mobileC = homeProductListings.get(posC).getCendorMobileNumber();
+                String LandlineA = homeProductListings.get(posC).getVendorLandlineOne();
+                String LandlineB = homeProductListings.get(posC).getVendorLandlineTwo();
                 String email = homeProductListings.get(posC).getVendorEmail();
-                callDialog(mobileA, mobileB, LandlineA, LandlineB, email);
+
+                if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
+                } else {
+                    callDialog(mobileA, mobileB, mobileC, LandlineA, LandlineB, email);
+                }
                 break;
             case R.id.imgAddress:
                 int posA = (int) v.getTag();
@@ -307,6 +322,20 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
                 String address = homeProductListings.get(posA).getVendorAddress();
                 addressDialog(state, city, address);
                 break;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_PHONE_CALL) {
+            String mobileA = homeProductListings.get(posC).getVendorMobileOne();
+            String mobileB = homeProductListings.get(posC).getVendorMobileTwo();
+            String mobileC = homeProductListings.get(posC).getCendorMobileNumber();
+            String LandlineA = homeProductListings.get(posC).getVendorLandlineOne();
+            String LandlineB = homeProductListings.get(posC).getVendorLandlineTwo();
+            String email = homeProductListings.get(posC).getVendorEmail();
+
+            callDialog(mobileA, mobileB, mobileC, LandlineA, LandlineB, email);
         }
     }
 
@@ -370,7 +399,7 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
         dialogSubCategory.show();
     }
 
-    private void callDialog(String mobileA, String mobileB, String LandlineA,
+    private void callDialog(String mobileA, String mobileB, String mobileC, String LandlineA,
                             String LandlineB, String email) {
         dialogCall = new Dialog(mContext);
         dialogCall.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -383,9 +412,51 @@ public class HomeFragment extends BaseFragment implements View.OnClickListener {
 
         ((TextView) dialogCall.findViewById(R.id.txtMobileA)).setText(mobileA);
         ((TextView) dialogCall.findViewById(R.id.txtMobileB)).setText(mobileB);
+        ((TextView) dialogCall.findViewById(R.id.txtMobileC)).setText(mobileC);
         ((TextView) dialogCall.findViewById(R.id.txtLandlineA)).setText(LandlineA);
         ((TextView) dialogCall.findViewById(R.id.txtLandlineB)).setText(LandlineB);
         ((TextView) dialogCall.findViewById(R.id.txtEmailAddress)).setText(email);
+
+        dialogCall.findViewById(R.id.txtMobileA).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String number = ((TextView) dialogCall.findViewById(R.id.txtMobileA)).getText().toString();
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
+                startActivity(intent);
+            }
+        });
+        dialogCall.findViewById(R.id.txtMobileB).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String number = ((TextView) dialogCall.findViewById(R.id.txtMobileB)).getText().toString();
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
+                startActivity(intent);
+            }
+        });
+        dialogCall.findViewById(R.id.txtMobileC).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String number = ((TextView) dialogCall.findViewById(R.id.txtMobileC)).getText().toString();
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
+                startActivity(intent);
+            }
+        });
+        dialogCall.findViewById(R.id.txtLandlineA).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String number = ((TextView) dialogCall.findViewById(R.id.txtLandlineA)).getText().toString();
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
+                startActivity(intent);
+            }
+        });
+        dialogCall.findViewById(R.id.txtLandlineB).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String number = ((TextView) dialogCall.findViewById(R.id.txtLandlineB)).getText().toString();
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
+                startActivity(intent);
+            }
+        });
 
         dialogCall.findViewById(R.id.btnOk).setOnClickListener(new View.OnClickListener() {
             @Override

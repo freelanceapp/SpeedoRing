@@ -4,6 +4,9 @@ import android.app.Dialog;
 
 import com.speedoring.constant.Constant;
 import com.speedoring.modal.banner_model.BannerModel;
+import com.speedoring.modal.city.CityMainModal;
+import com.speedoring.modal.search_modal.SearchMainModal;
+import com.speedoring.modal.service_category.ServiceCatMainModal;
 import com.speedoring.modal.user.product_category.ProductCategoryMainModal;
 import com.speedoring.modal.user.product_detail.ProductDetailMainModal;
 import com.speedoring.modal.user.product_list_home.HomeProductListMainModal;
@@ -286,6 +289,69 @@ public class RetrofitService {
 
             @Override
             public void onFailure(Call<VendorEnquiryMainModal> call, Throwable throwable) {
+                if (dialog != null)
+                    AppProgressDialog.hide(dialog);
+                webResponse.onResponseFailed(throwable.getMessage());
+            }
+        });
+    }
+
+    public static void getCityList(final Dialog dialog, final Call<CityMainModal> method, final WebResponse webResponse) {
+        if (dialog != null)
+            AppProgressDialog.show(dialog);
+
+        method.enqueue(new Callback<CityMainModal>() {
+            @Override
+            public void onResponse(Call<CityMainModal> call, Response<CityMainModal> response) {
+                if (dialog != null)
+                    AppProgressDialog.hide(dialog);
+                WebServiceResponse.handleResponse(response, webResponse);
+            }
+
+            @Override
+            public void onFailure(Call<CityMainModal> call, Throwable throwable) {
+                if (dialog != null)
+                    AppProgressDialog.hide(dialog);
+                webResponse.onResponseFailed(throwable.getMessage());
+            }
+        });
+    }
+
+    public static void getServiceCatList(final Dialog dialog, final Call<ServiceCatMainModal> method, final WebResponse webResponse) {
+        if (dialog != null)
+            AppProgressDialog.show(dialog);
+
+        method.enqueue(new Callback<ServiceCatMainModal>() {
+            @Override
+            public void onResponse(Call<ServiceCatMainModal> call, Response<ServiceCatMainModal> response) {
+                if (dialog != null)
+                    AppProgressDialog.hide(dialog);
+                WebServiceResponse.handleResponse(response, webResponse);
+            }
+
+            @Override
+            public void onFailure(Call<ServiceCatMainModal> call, Throwable throwable) {
+                if (dialog != null)
+                    AppProgressDialog.hide(dialog);
+                webResponse.onResponseFailed(throwable.getMessage());
+            }
+        });
+    }
+
+    public static void getSearchData(final Dialog dialog, final Call<SearchMainModal> method, final WebResponse webResponse) {
+        if (dialog != null)
+            AppProgressDialog.show(dialog);
+
+        method.enqueue(new Callback<SearchMainModal>() {
+            @Override
+            public void onResponse(Call<SearchMainModal> call, Response<SearchMainModal> response) {
+                if (dialog != null)
+                    AppProgressDialog.hide(dialog);
+                WebServiceResponse.handleResponse(response, webResponse);
+            }
+
+            @Override
+            public void onFailure(Call<SearchMainModal> call, Throwable throwable) {
                 if (dialog != null)
                     AppProgressDialog.hide(dialog);
                 webResponse.onResponseFailed(throwable.getMessage());

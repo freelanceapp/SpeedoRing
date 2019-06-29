@@ -17,6 +17,9 @@ public class Constant {
     public static final String PRODUCT_LIST_HOME = "select-product-home.php";
     public static final String PRODUCT_LIST = "select-product.php";
     public static final String PRODUCT_DETAIL = "select-product-details.php";
+    public static final String CITY_LIST = "city.php";
+    public static final String SERVICE_CAT = "select-product-category.php";
+    public static final String SEARCH_DATA = "search.php";
 
     /*VENDOR*/
     public static final String VENDOR_LOGIN = "vendor-login.php";

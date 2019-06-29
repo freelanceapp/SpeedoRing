@@ -2,9 +2,12 @@ package com.speedoring.retrofit_provider;
 
 import com.speedoring.constant.Constant;
 import com.speedoring.modal.banner_model.BannerModel;
+import com.speedoring.modal.city.CityMainModal;
 import com.speedoring.modal.insta_mojo.GatewayOrderStatus;
 import com.speedoring.modal.insta_mojo.GetOrderIDRequest;
 import com.speedoring.modal.insta_mojo.GetOrderIDResponse;
+import com.speedoring.modal.search_modal.SearchMainModal;
+import com.speedoring.modal.service_category.ServiceCatMainModal;
 import com.speedoring.modal.user.product_category.ProductCategoryMainModal;
 import com.speedoring.modal.user.product_detail.ProductDetailMainModal;
 import com.speedoring.modal.user.product_list_home.HomeProductListMainModal;
@@ -65,6 +68,17 @@ public interface RetrofitApiClient {
     @FormUrlEncoded
     @POST(Constant.PRODUCT_DETAIL)
     Call<ProductDetailMainModal> productDetail(@Field("listing_id") String product_id);
+    
+    @FormUrlEncoded
+    @POST(Constant.SEARCH_DATA)
+    Call<SearchMainModal> searchData(@Field("city") String city, @Field("category_id") String category_id,
+                                     @Field("productname") String productname, @Field("page_number") String page_number);
+
+    @GET(Constant.CITY_LIST)
+    Call<CityMainModal> cityList();
+
+    @GET(Constant.SERVICE_CAT)
+    Call<ServiceCatMainModal> serviceCatList();
 
     /***************************************************************************************************/
     /*********************Vendor api******************/

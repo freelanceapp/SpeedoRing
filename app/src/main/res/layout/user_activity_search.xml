@@ -15,7 +15,7 @@
         <android.support.design.widget.AppBarLayout
             android:id="@+id/appBar"
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="110dp"
             android:theme="@style/AppTheme.AppBarOverlay">
 
             <android.support.v7.widget.Toolbar
@@ -34,9 +34,49 @@
                         android:id="@+id/imgBack"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
+                        android:layout_marginTop="16dp"
                         android:src="@drawable/ic_back"
                         android:tint="@color/white" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginTop="16dp"
+                            android:gravity="center_vertical|end"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/ic_location" />
+
+                            <Spinner
+                                android:id="@+id/spinnerCity"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:backgroundTint="@color/white"
+                                android:popupBackground="@color/colorPrimary" />
+
+                        </LinearLayout>
+
+                        <Spinner
+                            android:id="@+id/spinnerCategory"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="end"
+                            android:layout_marginTop="8dp"
+                            android:backgroundTint="@color/white"
+                            android:popupBackground="@color/colorPrimary" />
+
+                    </LinearLayout>
 
                     <TextView
                         android:id="@+id/txtTitle"
@@ -50,34 +90,50 @@
                         android:gravity="center"
                         android:text="Select City"
                         android:textColor="@color/white"
-                        android:textSize="14sp" />
+                        android:textSize="14sp"
+                        android:visibility="gone" />
 
                 </RelativeLayout>
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.AppBarLayout>
 
-        <EditText
-            android:id="@+id/edtSearch"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="-20dp"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:background="@drawable/layout_back_a"
-            android:drawableStart="@drawable/ic_search_b"
-            android:drawablePadding="16dp"
-            android:elevation="8dp"
-            android:hint="Search"
-            android:paddingStart="16dp"
-            android:paddingTop="8dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="8dp"
-            android:textSize="14sp" />
+            android:elevation="8dp">
+
+            <EditText
+                android:id="@+id/edtSearch"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/layout_back_a"
+                android:drawablePadding="16dp"
+                android:hint="Search"
+                android:paddingStart="16dp"
+                android:paddingTop="8dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="8dp"
+                android:textSize="14sp" />
+
+            <ImageView
+                android:id="@+id/imgSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_search"
+                android:tint="@color/colorPrimary" />
+        </RelativeLayout>
+
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recyclerViewSearch"
+            android:id="@+id/recyclerViewProducts"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </LinearLayout>

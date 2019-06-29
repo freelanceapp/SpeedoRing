@@ -1,7 +1,14 @@
 package com.speedoring.ui.user.activity;
 
+import android.Manifest;
 import android.app.Dialog;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,6 +30,8 @@ import retrofit2.Response;
 
 public class UserProductListActivity extends BaseActivity implements View.OnClickListener {
 
+    private static final int REQUEST_PHONE_CALL = 789;
+    private int pos;
     private String productCategoryId = "", subCategoryId = "", categoryName = "";
 
     private ProductListPaginationAdapter adapter;
@@ -156,13 +165,19 @@ public class UserProductListActivity extends BaseActivity implements View.OnClic
                 finish();
                 break;
             case R.id.imgCall:
-                int pos = (int) v.getTag();
+                pos = (int) v.getTag();
                 String mobileA = adapter.getProductList().get(pos).getVendorMobileOne();
                 String mobileB = adapter.getProductList().get(pos).getVendorMobileTwo();
-                String LandlineA = adapter.getProductList().get(pos).getVendorMobileOne();
-                String LandlineB = adapter.getProductList().get(pos).getVendorMobileTwo();
+                String mobileC = adapter.getProductList().get(pos).getCendorMobileNumber();
+                String LandlineA = adapter.getProductList().get(pos).getVendorLandlineOne();
+                String LandlineB = adapter.getProductList().get(pos).getVendorLandlineTwo();
                 String email = adapter.getProductList().get(pos).getVendorEmail();
-                callDialog(mobileA, mobileB, LandlineA, LandlineB, email);
+
+                if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CALL_PHONE}, REQUEST_PHONE_CALL);
+                } else {
+                    callDialog(mobileA, mobileB, mobileC, LandlineA, LandlineB, email);
+                }
                 break;
             case R.id.imgAddress:
                 int posA = (int) v.getTag();
@@ -174,7 +189,21 @@ public class UserProductListActivity extends BaseActivity implements View.OnClic
         }
     }
 
-    private void callDialog(String mobileA, String mobileB, String LandlineA,
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == REQUEST_PHONE_CALL) {
+            String mobileA = adapter.getProductList().get(pos).getVendorMobileOne();
+            String mobileB = adapter.getProductList().get(pos).getVendorMobileTwo();
+            String mobileC = adapter.getProductList().get(pos).getCendorMobileNumber();
+            String LandlineA = adapter.getProductList().get(pos).getVendorLandlineOne();
+            String LandlineB = adapter.getProductList().get(pos).getVendorLandlineTwo();
+            String email = adapter.getProductList().get(pos).getVendorEmail();
+
+            callDialog(mobileA, mobileB, mobileC, LandlineA, LandlineB, email);
+        }
+    }
+
+    private void callDialog(String mobileA, String mobileB, String mobileC, String LandlineA,
                             String LandlineB, String email) {
         dialogCall = new Dialog(mContext);
         dialogCall.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -187,9 +216,51 @@ public class UserProductListActivity extends BaseActivity implements View.OnClic
 
         ((TextView) dialogCall.findViewById(R.id.txtMobileA)).setText(mobileA);
         ((TextView) dialogCall.findViewById(R.id.txtMobileB)).setText(mobileB);
+        ((TextView) dialogCall.findViewById(R.id.txtMobileC)).setText(mobileC);
         ((TextView) dialogCall.findViewById(R.id.txtLandlineA)).setText(LandlineA);
         ((TextView) dialogCall.findViewById(R.id.txtLandlineB)).setText(LandlineB);
         ((TextView) dialogCall.findViewById(R.id.txtEmailAddress)).setText(email);
+
+        dialogCall.findViewById(R.id.txtMobileA).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String number = ((TextView) dialogCall.findViewById(R.id.txtMobileA)).getText().toString();
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
+                startActivity(intent);
+            }
+        });
+        dialogCall.findViewById(R.id.txtMobileB).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String number = ((TextView) dialogCall.findViewById(R.id.txtMobileB)).getText().toString();
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
+                startActivity(intent);
+            }
+        });
+        dialogCall.findViewById(R.id.txtMobileC).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String number = ((TextView) dialogCall.findViewById(R.id.txtMobileC)).getText().toString();
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
+                startActivity(intent);
+            }
+        });
+        dialogCall.findViewById(R.id.txtLandlineA).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String number = ((TextView) dialogCall.findViewById(R.id.txtLandlineA)).getText().toString();
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
+                startActivity(intent);
+            }
+        });
+        dialogCall.findViewById(R.id.txtLandlineB).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String number = ((TextView) dialogCall.findViewById(R.id.txtLandlineB)).getText().toString();
+                Intent intent = new Intent(Intent.ACTION_DIAL, Uri.parse("tel:" + number));
+                startActivity(intent);
+            }
+        });
 
         dialogCall.findViewById(R.id.btnOk).setOnClickListener(new View.OnClickListener() {
             @Override
