@@ -74,6 +74,9 @@
         <activity android:name=".ui.vendor.activity.ForgotPasswordActivity" />
         <activity android:name=".ui.user.activity.UserAllCategoryActivity" />
         <activity android:name=".ui.user.activity.SearchActivity" />
+        <activity
+            android:name=".ui.AppDetailActivity"
+            android:label="" />
 
         <meta-data
             android:name="io.fabric.ApiKey"

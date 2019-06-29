@@ -171,21 +171,21 @@ public class VendorHomeActivity extends BaseActivity implements View.OnClickList
             case R.id.txtPrivacy:
                 drawerLayout.closeDrawer(GravityCompat.START);
                 txtTitle.setText("Privacy Policy");
-                bundle.putString("type", "privacy");
+                bundle.putString("type", getString(R.string.privacy_policy));
                 privacyFragment.setArguments(bundle);
                 fragmentUtils.replaceFragment(privacyFragment, Constant.VendorPrivacyFragment, R.id.frameLayout);
                 break;
             case R.id.txtTermsCondition:
                 drawerLayout.closeDrawer(GravityCompat.START);
                 txtTitle.setText("Terms & Conditions");
-                bundle.putString("type", "terms");
+                bundle.putString("type", getString(R.string.terms_and_conditions));
                 privacyFragment.setArguments(bundle);
                 fragmentUtils.replaceFragment(privacyFragment, Constant.VendorPrivacyFragment, R.id.frameLayout);
                 break;
             case R.id.txtAboutUs:
                 drawerLayout.closeDrawer(GravityCompat.START);
                 txtTitle.setText("About Us");
-                bundle.putString("type", "about");
+                bundle.putString("type", getString(R.string.about_us));
                 privacyFragment.setArguments(bundle);
                 fragmentUtils.replaceFragment(privacyFragment, Constant.VendorPrivacyFragment, R.id.frameLayout);
                 break;

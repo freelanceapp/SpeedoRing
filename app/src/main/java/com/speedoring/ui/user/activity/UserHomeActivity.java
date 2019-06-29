@@ -29,6 +29,7 @@ import com.speedoring.modal.user.product_sub_category.ProductSubCategoryMainModa
 import com.speedoring.modal.user.service_category.ServicesCategory;
 import com.speedoring.retrofit_provider.RetrofitService;
 import com.speedoring.retrofit_provider.WebResponse;
+import com.speedoring.ui.AppDetailActivity;
 import com.speedoring.ui.user.fragment.HomeFragment;
 import com.speedoring.ui.vendor.activity.SignInActivity;
 import com.speedoring.ui.vendor.activity.SignUpActivity;
@@ -79,6 +80,10 @@ public class UserHomeActivity extends BaseActivity implements View.OnClickListen
         findViewById(R.id.llLogin).setOnClickListener(this);
         findViewById(R.id.txtTitle).setOnClickListener(this);
         findViewById(R.id.txtSearch).setOnClickListener(this);
+
+        findViewById(R.id.txtPrivacy).setOnClickListener(this);
+        findViewById(R.id.txtTermsCondition).setOnClickListener(this);
+        findViewById(R.id.txtAboutUs).setOnClickListener(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -154,6 +159,7 @@ public class UserHomeActivity extends BaseActivity implements View.OnClickListen
 
     @Override
     public void onClick(View v) {
+        Intent intentA = new Intent(mContext, AppDetailActivity.class);
         switch (v.getId()) {
             case R.id.llHome:
                 fragmentUtils.replaceFragment(homeFragment, Constant.HomeFragment, R.id.frameLayout);
@@ -219,6 +225,21 @@ public class UserHomeActivity extends BaseActivity implements View.OnClickListen
                 intent.putExtra("category_name", categoryName);
                 dialogSubCategory.dismiss();
                 startActivity(intent);
+                break;
+            case R.id.txtTermsCondition:
+                intentA.putExtra("title", "Terms and Conditions");
+                intentA.putExtra("data", getString(R.string.terms_and_conditions));
+                startActivity(intentA);
+                break;
+            case R.id.txtPrivacy:
+                intentA.putExtra("title", "Privacy Policy");
+                intentA.putExtra("data", getString(R.string.privacy_policy));
+                startActivity(intentA);
+                break;
+            case R.id.txtAboutUs:
+                intentA.putExtra("title", "About Us");
+                intentA.putExtra("data", getString(R.string.about_us));
+                startActivity(intentA);
                 break;
         }
     }
